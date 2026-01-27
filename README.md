@@ -66,7 +66,7 @@ Dorpn follows three core principles:
 3. **Predictable Performance**: No GC pauses, no JIT warm-up variance
 4. **System Integration**: Direct access to C libraries via generated code
 
-*Benchmarks based on v0.3.0. All benchmarks are not fixed. Dorpn already excels in startup, memory, and numerical performance—key advantages for CLI tools, system utilities, and performance-sensitive applications.*
+*Benchmarks based on v0.2.1 . All benchmarks are not fixed. Dorpn already excels in startup, memory, and numerical performance—key advantages for CLI tools, system utilities, and performance-sensitive applications.*
 
 
 ## Source Code
