@@ -32,7 +32,7 @@ Dorpn follows three core principles:
 - **Rich Standard Library** - Built-in functions for strings, math, I/O, and more
 - **Cross-Platform** - Generates portable C code that compiles anywhere GCC runs
 
-## ⚡ Performance Metrics (v0.3.3)
+## ⚡ Performance Metrics (v0.3.2)
 
 | Operation                   | Performance | Latency  | Strategic Advantage                                           |
 | :-------------------------- | :---------- | :------- | :----------------------------------------------------------- |
@@ -45,12 +45,12 @@ Dorpn follows three core principles:
 
 ---
 
-### 🚀 Key Improvements in v0.3.3
+### 🚀 Key Improvements in v0.3.2
 
 * **Integrated Semantic Validation:** Compilation now includes a comprehensive logic verification phase. This prevents runtime failures by ensuring code integrity before the binary is generated.
 * **Static Runtime Linking:** By utilizing a dedicated, pre-optimized runtime library, generated binaries are leaner and benefit from global machine-code optimizations.
 * **Type-Safe Memory Management:** Memory allocation for dynamic types has been refined, resulting in a 15-20% improvement in predictability during high-load operations.
-* **Performance Balance:** v0.3.3 achieves a superior equilibrium, offering the safety of a high-level language with the raw responsiveness of a native systems language.
+* **Performance Balance:** v0.3.2 achieves a superior equilibrium, offering the safety of a high-level language with the raw responsiveness of a native systems language.
 
 **Key Insights:**
 - ✓ **Sub-millisecond startup** - Perfect for CLI tools
@@ -75,7 +75,7 @@ Dorpn follows three core principles:
 3. **Predictable Performance**: No GC pauses, no JIT warm-up variance
 4. **System Integration**: Direct access to C libraries via generated code
 
-*Benchmarks based on v0.2.1 . All benchmarks are not fixed. Dorpn already excels in startup, memory, and numerical performance—key advantages for CLI tools, system utilities, and performance-sensitive applications.*
+*Benchmarks based on v0.3.2 . All benchmarks are not fixed. Dorpn already excels in startup, memory, and numerical performance—key advantages for CLI tools, system utilities, and performance-sensitive applications.*
 
 
 ## Source Code
