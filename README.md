@@ -123,6 +123,6 @@ keep x < 10:
 For questions, issues, or feedback:
 
 - Create an issue in this repository.
-- Join Our [Discord](https://discord.gg/NavzqZzBM) server.
+- Join Our [Discord](https://discord.gg/9J2qabs3gu) server.
 
 *Note: These benchmarks reflect the current beta implementation. Performance will improve as the compiler matures and optimizations are added.*
