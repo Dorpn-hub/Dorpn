@@ -12,7 +12,7 @@
 - **`.repeat()`** does not insert seprators between repetitions.
 - **Syntax**: `"string".repeat(times)`
 
-```
+```py
 tag stars = "*".repeat(10)
 tag hello = "Hi ".repeat(3) 
 print(stars)    # Output: **********
