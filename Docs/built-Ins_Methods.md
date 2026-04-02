@@ -18,7 +18,7 @@ tag hello = "Hi ".repeat(3)
 print(stars)    # Output: **********
 print(hello)    # Output: Hi Hi Hi
 ```
-```
+```py
 print("=".repeat(5))  # Outptut: =====
 ```
 ---
@@ -29,7 +29,7 @@ print("=".repeat(5))  # Outptut: =====
 - The original string is not modified , `.alter()` always returns a new string.
 - **Syntax**: `"string".alter()`
 
-```
+```py
 tag text = "Hello World"
 tag new_text = text.alter("World", "Dorpn")
 print(new_text)  # "Hello Dorpn"
@@ -44,7 +44,7 @@ print(new_text)  # "Hello Dorpn"
 - Does not modify the original string `.flip()` always returns a new one. Must assign or use the returned value.
 - **Syntax**: `"string".flip()`
 
-```
+```py
 tag reversed = "hello".flip() 
 tag palindrome = "racecar".flip() 
 print(reversed)    # "olleh"
@@ -59,7 +59,7 @@ print(palindrome)    # "racecar"
 - Always returns an integer(**Int**) represents the number of characters in the string, `.size()` is useful for validation, loops, and formatting tasks.
 - **Syntax**: `"string".size()`
 
-```
+```py
 tag length = "Hello".size()  # 5
 tag empty = "".size()        # 0
 
@@ -74,7 +74,7 @@ print("Name length:", name.size())
 
 When `.size()` is called on a file object loaded via `Onload()`, it accepts an optional unit argument to return the file content size in a specific unit. Defaults to bytes, if no argument is provided, or if called on a plain string.
 
-```js
+```py
 tag file = Onload("path/to/file.txt")
 
 print(file.size())       # bytes (default)
