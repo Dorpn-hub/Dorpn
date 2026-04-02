@@ -67,3 +67,21 @@ tag empty = "".size()        # 0
 tag name = "Alice"
 print("Name length:", name.size())
 ```
+--- 
+
+* Updated `.size()` *v 0.3.3*:
+#### File Size with Units
+
+When `.size()` is called on a file object loaded via `Onload()`, it accepts an optional unit argument to return the file content size in a specific unit. Defaults to bytes, if no argument is provided, or if called on a plain string.
+
+```js
+tag file = Onload("path/to/file.txt")
+
+print(file.size())       # bytes (default)
+print(file.size("bits")) # in bits
+print(file.size("mb"))   # in megabytes
+print(file.size("gb"))   # in gigabytes
+print(file.size("tb"))   # in terabytes
+```
+
+> **Note:** Unit arguments are case-sensitive. If no file object is defined, `.size()` falls back to returning the value in bytes.
