@@ -58,7 +58,7 @@ Common questions, gotchas, and things that might trip you up when coming from Py
 
 ## Quick Syntax Cheatsheet
 
-```go
+```py
 # Variables
 tag name = "Dorpn"
 Const VERSION = 4
