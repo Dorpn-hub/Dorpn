@@ -1,96 +1,181 @@
 # Frequently Asked Questions
 
----
-## 📦 Installation & Releases
----
-
-**Q: How do I install Dorpn?**  
-A: Download the latest release binary for your OS from the [Releases page](https://github.com/Dorpn-hub/dorpn/releases). No compilation needed!
-
-**Q: Is the source code available?**  
-A: The compiler source will be released when Dorpn reaches v1.0 or becomes self-hosted. Currently, only compiled binaries are provided.
-
-**Q: How do I update to a newer version?**  
-A: Simply download the latest release binary and replace your existing `dorpn` executable.
-
-**Q: Can I build from source?**  
-A: Not currently. The compiler is closed-source until v1.0 to ensure stability and proper documentation.
+Got a question about Dorpn? Chances are it's answered here. If not, drop by the [Discord](https://discord.gg/9J2qabs3gu) and ask.
 
 ---
-## ✍️ Basic Usage
----
 
-**Q: How do I compile my first program?**  
-A: `dorpn hello.dpn` creates an executable. Use `dorpn hello.dpn --run` to compile and run immediately.
+## Installation & Releases
 
-**Q: Can I specify a different output filename?**  
-A: Not directly in v0.3.0. Workaround: `dorpn input.dpn && mv input custom_name`
+**Q: How do I install Dorpn?**
 
-**Q: How do I compile without executing?**  
-A: Just omit the `--run` flag: `dorpn program.dpn` creates executable only.
-
-**Q: Can I see the generated C code?**  
-A: Yes! Use `dorpn program.dpn --keep-c` to preserve the intermediate C file.
-
-**Q: Is there a REPL or interactive mode?**  
-A: Not yet. Use this one-liner: `echo 'print("test")' > temp.dpn && dorpn temp.dpn -r && rm temp.dpn` or VS Code with `Dorpn` extension.
+Download the latest Windows installer from the [Releases page](https://github.com/Dorpn-hub/dorpn/releases). Run the installer and Dorpn will be ready to use — no manual setup needed.
 
 ---
-## 🐛 Common Errors & Solutions
----
 
-**Q: "gcc: command not found" error**  
-A: Install GCC: Ubuntu/Debian: `sudo apt install gcc`, macOS: `xcode-select --install`
+**Q: Is the source code available?**
 
-**Q: "File not found" but the file exists**  
-A:- a. File extension is `.dpn`.
-  - 2) You're in the right directory
-  - 3) No typos in filename
-
-**Q: "Permission denied" when running the executable**  
-A: Make it executable: `chmod +x program_name`
-
-**Q: Compilation fails with syntax error**  
-A: Use verbose mode to pinpoint: `dorpn file.dpn --verbose`
-
-**Q: "Cannot assign to constant" error**  
-A: You're trying to modify a `Const` variable. Use `tag` for mutable variables.
-
-**Q: "Type mismatch" in assignment**  
-A: Dorpn has strict static typing. Once `tag x = 10` (Int), you can't do `x = "text"` later.
+Not yet. The compiler will be open-sourced when Dorpn reaches v1.0 or becomes self-hosted. For now, only compiled binaries are distributed.
 
 ---
-## 💡 Language Questions
----
 
-**Q: What's the difference between `tag` and `Const`?**  
-A: `tag` creates mutable variables, `Const` creates immutable constants (cannot be reassigned).
+**Q: How do I update to a newer version?**
 
-**Q: How do I convert between types?**  
-A: Automatic in some cases (Int→Float in math, any→String with `+`). Manual conversion functions coming soon.
-
-**Q: Are arrays/lists supported?**  
-A: Basic list literals (`[1,2,3]`) and indexing are supported in v0.3.0.
-
-**Q: Can I use external C libraries?**  
-A: Not in v0.3.0. C FFI (Foreign Function Interface) is planned for future releases.
-
-**Q: How should I structure larger projects?**  
-A: Currently single-file only. Module/import system is planned for future versions.
+Download the latest installer from the releases page and run it — it'll replace your existing installation automatically.
 
 ---
-## ⚡ Performance & Debugging
+
+**Q: Can I build from source?**
+
+Not currently. The compiler is closed-source until v1.0 to ensure stability and proper documentation before public scrutiny.
+
 ---
 
-**Q: My program is slow. How can I optimize?**  
-A:- a. Avoid string concatenation in loops 
-  - 2) Use `Int` instead of `Float` when possible 
-  - 3) Use `--keep-c` to examine generated C code
+## Basic Usage
 
-**Q: How do I debug my Dorpn code?**  
-A:- a. Add `print()` statements 
-  - 2) Use `type()` to check variable types 
-  - 3) Examine C code with `--keep-c` 4) Use `--verbose` for compilation insights
+**Q: How do I compile my first program?**
 
-**Q: What's the maximum file size Dorpn can handle with `Onload()`?**  
-A: Limited by available system memory. For large files, considering streaming or chunked reading in future versions.
+```sh
+dorpn hello.dpn          # compile only
+dorpn hello.dpn --run    # compile and run immediately
+```
+
+---
+
+**Q: Can I specify a custom output filename?**
+
+Yes, use the `--out` flag (available since v0.3.4):
+
+```sh
+dorpn program.dpn --out myapp
+```
+
+---
+
+**Q: How do I see the generated C code?**
+
+Use `--keep-c` to preserve the intermediate C file after compilation:
+
+```sh
+dorpn program.dpn --keep-c
+```
+
+This is also useful for debugging or understanding what the compiler produces.
+
+---
+
+**Q: Is there a REPL or interactive mode?**
+
+Not yet. As a quick workaround:
+
+```sh
+echo 'print("test")' > temp.dpn && dorpn temp.dpn -r && rm temp.dpn
+```
+
+Or use the Dorpn VS Code extension for a smoother development experience.
+
+---
+
+## Common Errors & Solutions
+
+**Q: "File not found" but the file clearly exists**
+
+Check three things:
+- The file extension is `.dpn`
+- You're in the correct directory
+- There are no typos in the filename
+
+---
+
+**Q: Compilation fails with a syntax error and I can't find it**
+
+Run with `--verbose` to get more insight into the compilation process. Note that it currently shows the first 20–25 AST tokens, so it's most useful for catching early-stage errors:
+
+```sh
+dorpn file.dpn --verbose
+```
+
+---
+
+**Q: "Cannot assign to constant" error**
+
+You're trying to reassign a `Const` variable. Use `tag` instead if the value needs to change:
+
+```dpn
+Const PI = 3.14     # fixed, can't reassign
+tag counter = 0     # mutable, can reassign
+```
+
+---
+
+**Q: "Type mismatch" in assignment**
+
+Dorpn is statically typed. Once a variable is assigned a type, it stays that type:
+
+```dpn
+tag x = 10
+x = "hello"   # error — x is Int, not String
+```
+
+---
+
+## Language Questions
+
+**Q: What's the difference between `tag` and `Const`?**
+
+`tag` declares a mutable variable — you can reassign it later. `Const` declares an immutable constant — once set, it cannot be changed.
+
+```dpn
+tag score = 0       # can change later
+Const MAX = 100     # fixed forever
+```
+
+---
+
+**Q: How do I convert between types?**
+
+Some conversions happen automatically — for example, `Int` to `Float` in math expressions, or any type to `String` when using `+`. Manual type conversion functions are planned for an upcoming release.
+
+---
+
+**Q: Are lists/arrays supported?**
+
+Not in the current version. List and array support is planned for a future release.
+
+---
+
+**Q: Can I use external C libraries?**
+
+Not yet. A C FFI (Foreign Function Interface) is planned for a future release.
+
+---
+
+**Q: How should I structure larger projects?**
+
+Currently Dorpn is single-file only. A module and import system is on the roadmap.
+
+---
+
+## Performance & Debugging
+
+**Q: My program feels slow. How do I optimize?**
+
+A few things that help:
+- Avoid string concatenation inside loops
+- Prefer `Int` over `Float` when decimal precision isn't needed
+- Use `--keep-c` to inspect the generated C and spot inefficiencies
+
+---
+
+**Q: How do I debug my Dorpn code?**
+
+The most practical approach right now:
+- Add `print()` calls to trace values
+- Use `type()` to inspect variable types at runtime
+- Use `--keep-c` to read the generated C output
+- Use `--verbose` for early-stage compilation insights (shows first 20–25 AST tokens)
+
+---
+
+**Q: Is there a file size limit when using `Onload()`?**
+
+No hard limit — it's bounded by available system memory. For very large files, chunked or streaming reads are being considered for future versions.
