@@ -123,7 +123,7 @@ The JavaScript target is useful for rapid testing — compilation finishes in mi
 
 Starting from v0.4.0, Dorpn includes `printOut()` — a built-in that writes to stdout without a newline, making ANSI color output easy to compose:
 
-```dpn
+```js
 Const fgGreen = "\033[92m"
 Const fgRed   = "\033[91m"
 Const fgReset = "\033[0m"
