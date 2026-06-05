@@ -71,7 +71,7 @@ Not yet. As a quick workaround:
 echo 'print("test")' > temp.dpn && dorpn temp.dpn -r && rm temp.dpn
 ```
 
-Or use the Dorpn VS Code extension for a smoother development experience.
+Or use the [Dorpn VS Code extension](https://marketplace.visualstudio.com/items?itemName=DPSRana.dorpn-lang) for a smoother development experience.
 
 ---
 
