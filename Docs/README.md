@@ -1,47 +1,81 @@
-# Dorpn Language Documentation
+# Dorpn — Language Documentation
+
+Welcome to the official Dorpn docs. Everything you need to read, write, and understand Dorpn is in this folder — pick a section below and dive in.
+
 ---
-## 📖 Overview
 
-Dorpn is a statically-typed, compiled language with Python-like syntax that compiles to C. It combines readability with performance through type inference and direct C compilation.
+## Compilation Pipeline
 
---- 
-### Compilation Pipeline
+Here's what happens when you run `dorpn program.dpn`:
 
-Dorpn Source (.dpn) 
-- **→ Lexing**
-- **→ Tokens** 
-- **→ Parsing** 
-- **→ AST**
-- **→ Semantic Analyzer** 
-- **→ Code Generating**
-- **→ GCC** 
-- **→ Executable**
+```
+.dpn Source File
+      │
+      ▼
+   Lexer  ──────────────── turns raw text into tokens
+      │
+      ▼
+   Parser  ─────────────── builds an Abstract Syntax Tree (AST)
+      │
+      ▼
+  Semantic Analyzer ──── validates types, scopes, and logic
+      │
+      ▼
+  Code Generator ──────── emits clean, readable C code
+      │
+      ▼
+    GCC  ────────────────── compiles C to native machine code
+      │
+      ▼
+  Executable  ✓
+```
 
+No VM. No runtime. Just your code, C, and the machine.
 
-### Available Commands for Dorpn v0.3.0
+---
 
-| Command | Short Flag | Description | Example Usage | Notes |
-|---------|------------|-------------|---------------|-------|
-| **Compile file** | (none) | Compile a `.dpn` file to executable | `dorpn program.dpn` | Creates executable with same name |
-| **Compile and run** | `-r` | Compile and immediately execute | `dorpn program.dpn --run` | Equivalent to compile then `./program` |
-| **Keep C file** | `-k` | Keep generated intermediate C code | `dorpn program.dpn --keep-c` | Preserves `program.c` after compilation |
-| **Verbose mode** | `-v` | Show detailed compilation output | `dorpn program.dpn --verbose` | Displays lexer, parser, codegen stages |
-| **Show help** | `-h` | Display help information | `dorpn --help` | Works with or without filename |
-| **Show version** | `-V` | Display compiler version | `dorpn --version` | Shows version and copyright |
-| **Run (alternative)** | `--run` | Same as `-r` | `dorpn program.dpn --run` | Long form of run flag |
-| **Keep C (alternative)** | `--keep-c` | Same as `-k` | `dorpn program.dpn --keep-c` | Long form of keep-c flag |
-| **Verbose (alternative)** | `--verbose` | Same as `-v` | `dorpn program.dpn --verbose` | Long form of verbose flag |
-| **Help (alternative)** | `--help` | Same as `-h` | `dorpn --help` | Long form of help flag |
-| **Version (alternative)** | `--version` | Same as `-V` | `dorpn --version` | Long form of version flag |
+## Documentation Index
 
-## 🎯 How to Use This Documentation
+### [Variables.md](./Variables.md)
+How to declare and use variables in Dorpn. Covers `tag` for mutable values, `Const` for constants, type inference, and scoping rules.
 
-This documentation provides:
-1. **Complete Syntax Reference** - Every keyword and construct explained
-2. **Practical Examples** - Real code snippets for each feature
-3. **Internal Details** - Understanding how the compiler works
-4. **Best Practices** - Guidelines for writing good Dorpn code
+### [Types.md](./Types.md)
+The full type system — primitives, strings, booleans, and how Dorpn's static typing works under the hood with type inference.
 
-The documentation is structured to serve both:
-- **Language Users**: Who want to write Dorpn programs
-- **Compiler Developers**: Who want to understand/extend the implementation
+### [Operators.md](./Operators.md)
+Every operator Dorpn supports: arithmetic, comparison, logical, and assignment. Includes precedence rules and examples.
+
+### [built-Ins_Functions.md](./built-Ins_Functions.md)
+All built-in functions available out of the box — `print`, `input`, `range`, and more. Each one mapped to its C equivalent.
+
+### [built-Ins_Methods.md](./built-Ins_Methods.md)
+Built-in methods on types — string manipulation, list operations, and other type-specific utilities.
+
+### [FAQ.md](./FAQ.md)
+Common questions, gotchas, and things that might trip you up when coming from Python or another language.
+
+---
+
+## Quick Syntax Cheatsheet
+
+```dpn
+# Variables
+tag name = "Dorpn"
+Const VERSION = 4
+
+# Function
+func int add(int a, int b)
+    return a + b
+
+# Loop
+loop i in range(5)
+    print(i)
+
+# Comment
+-- this is a comment
+# this too
+```
+
+---
+
+> **New here?** Start with [Variables.md](./Variables.md) → then [Types.md](./Types.md) → then [Operators.md](./Operators.md). That's the natural reading order.
