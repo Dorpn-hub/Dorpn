@@ -64,16 +64,15 @@ tag name = "Dorpn"
 Const VERSION = 4
 
 # Function
-func int add(int a, int b)
+func int add(Int: a, Int: b):
     return a + b
 
 # Loop
-loop i in range(5)
+loop i in 5:
     print(i)
 
-# Comment
+# this is aComment
 -- this is a comment
-# this too
 ```
 
 ---
