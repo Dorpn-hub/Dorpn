@@ -43,7 +43,7 @@ Const VERSION = 4
 tag name = "Dorpn"
 
 # Functions
-func greet(String: name):
+func greet(name: String):
     return "Hello, " + name
 
 # Conditionals
@@ -62,9 +62,13 @@ loop i in 100:
 keep x < 10:
     x = x + 1
     print(x)
+
+# Entry point in Dorpn
+func _Start():
+    print(greet("Users"))
 ```
 
-For the full syntax reference, see the [Docs folder](./Docs/) — it covers variables, types, operators, built-in functions and methods, with examples for each.
+For the full syntax reference, check the [Docs folder](./Docs/) — it covers variables, types, operators, built-in functions and methods, with examples for each.
 
 ---
 
