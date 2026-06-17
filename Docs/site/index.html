@@ -426,7 +426,6 @@
   .pipeline-step:nth-child(9) .pipeline-arrow { animation-delay: 0.9s; }
 
   /* ── COMMAND TABLE ── */
-/* ── COMMAND TABLE ── */
 .cmd-table-wrap {
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -438,10 +437,10 @@
 
 .cmd-table {
     width: 100%;
-    min-width: 850px;  /* Slightly wider for all content */
+    min-width: 850px;  
     border-collapse: collapse;
     font-size: 0.78rem;
-    table-layout: auto;  /* Changed from 'fixed' to allow natural sizing */
+    table-layout: auto;  
 }
 
 /* Column width distribution */
@@ -477,14 +476,14 @@
 
 .cmd-table th {
     background: var(--surface2);
-    padding: 8px 12px;  /* Slightly more padding for headers */
+    padding: 8px 12px; 
     text-align: left;
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.6px;
     color: var(--muted);
     font-weight: 500;
-    border-bottom: 2px solid var(--border);  /* Thicker line */
+    border-bottom: 2px solid var(--border);  
     white-space: nowrap;
 }
 
@@ -493,20 +492,18 @@
     border-bottom: 1px solid rgba(42,38,58,0.3);
     vertical-align: middle;
     color: #b8b4cc;
-    white-space: nowrap;  /* Keep text on one line */
-    overflow: visible;  /* REMOVES ELLIPSIS */
-    text-overflow: clip;  /* REMOVES ELLIPSIS */
+    white-space: nowrap;  
+    overflow: visible; 
+    text-overflow: clip;  
 }
 
-/* Alternative: Allow text to wrap if needed */
 .cmd-table td {
-    white-space: normal;  /* Allow wrapping if needed */
-    word-break: break-word;  /* Break long words if needed */
+    white-space: normal;  
+    word-break: break-word;  
 }
 
-/* But keep code examples compact */
 .cmd-table td code {
-    white-space: nowrap;  /* Code stays on one line */
+    white-space: nowrap; 
 }
 
 .cmd-table tr:last-child td {
@@ -521,9 +518,6 @@
 .cmd-table tbody tr {
     border-bottom: 2px solid var(--border);  /* Separates rows */
 }
-
-/* Or use margin (but border-collapse: collapse doesn't support margin) */
-/* Alternative: Add a spacer row (not recommended) */
 
 .cmd-table td:first-child {
     font-family: 'JetBrains Mono', monospace;
@@ -547,7 +541,6 @@
     white-space: nowrap;
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
     .cmd-table-wrap {
         overflow-x: auto;
