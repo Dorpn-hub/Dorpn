@@ -1457,7 +1457,7 @@ name  = <span class="str">"Bob"</span>
 <span class="fn">print</span>(content)
 
 <span class="kw">tag</span> config: <span class="type">String</span> = <span class="fn">Onload</span>(<span class="str">"config.json"</span>)
-<span class="fn">print</span>(<span class="str">"Loaded:"</span>, content.<span class="fn">size</span>(), <span class="str">"bytes"</span>)</code></pre>
+<span class="fn">print</span>(<span class="str">"Loaded:"</span>, content.<span class="fn">size</span>("kb"))</code></pre>
       </div>
     </div>
   </section>
@@ -1501,8 +1501,8 @@ name  = <span class="str">"Bob"</span>
 
     <h3>// What to do</h3>
     <ul>
-      <li>Replace <code>Bool32</code> with <code>bool</code> in all your code</li>
-      <li>Replace <code>String32</code> with <code>str</code> in all your code</li>
+      <li>Replace <code>Bool32</code> with <code>Bool</code> in all your code</li>
+      <li>Replace <code>String32</code> with <code>String</code> in all your code</li>
       <li><code>Int32</code> and <code>Float32</code> are <strong>not</strong> deprecated — they remain valid 32-bit types</li>
     </ul>
 
