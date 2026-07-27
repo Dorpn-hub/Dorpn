@@ -15,7 +15,7 @@ loop row in 4:
     printOut("*")
   print("")
 
-# --- Triangle / Tree ---
+# --- Triangle ---
 print("--- Tree ---")
 loop row in 5:
   loop col in 5:
