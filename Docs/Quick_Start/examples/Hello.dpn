@@ -1,0 +1,13 @@
+# ----------------------------------------
+# Hello.dpn — Your first Dorpn program
+# Tested on Dorpn v0.4.1
+# ----------------------------------------
+
+print("Hello, World!")
+
+# --- Using ask() for input (prompt must be a String) ---
+tag userName: String = ask("What is your name? ")
+
+printOut("Nice to meet you, ")
+printOut(userName)
+print("! Welcome to Dorpn.")
