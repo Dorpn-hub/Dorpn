@@ -4,7 +4,7 @@
 
 Ready-to-run `.dpn` examples — copy any file into your project (or run directly) to see it in action.
 
-⚠️ **Breaking changes in v0.4.1:** colons (`:`) are now required at every block header, indentation must be a consistent 2 or 4 spaces, and `String32`/`Bool32` have been removed in favor of `String`/`Bool`. If you're copying these examples into an older Dorpn install, they may not run correctly.
+**Breaking changes in v0.4.1:** colons (`:`) are now required at every block header, indentation must be a consistent 2 or 4 spaces, and `String32`/`Bool32` have been removed in favor of `String`/`Bool`. If you're copying these examples into an older Dorpn install, they may not run correctly.
 
 ## Examples
 
