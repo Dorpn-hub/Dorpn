@@ -1,0 +1,52 @@
+# ----------------------------------------
+# loop.dpn — basic iteration + shape patterns
+# Tested on Dorpn v0.4.1
+# ----------------------------------------
+
+# --- Basic iteration (loop var in N == range(N)) ---
+print("--- Basic Iteration ---")
+loop i in 5:
+  print(i)
+
+# --- Rectangle ---
+print("--- Rectangle ---")
+loop row in 4:
+  loop col in 10:
+    printOut("*")
+  print("")
+
+# --- Triangle / Tree ---
+print("--- Tree ---")
+loop row in 5:
+  loop col in 5:
+    if col >= 4 - row:
+      printOut("*")
+    else:
+      printOut(" ")
+  print("")
+
+# --- Heart ---
+print("--- Heart ---")
+loop i in 6:
+  loop j in 7:
+    if (i == 0 and j % 3 != 0) or (i == 1 and j % 3 == 0) or (i - j == 2) or (i + j == 8):
+      printOut("*")
+    else:
+      printOut(" ")
+  print("")
+
+# --- Circle (squared-distance check, no sqrt needed) ---
+print("--- Circle ---")
+tag radius: Int = 5
+tag cx: Int = 5
+tag cy: Int = 5
+
+loop y in 11:
+  loop x in 11:
+    tag dx: Int = x - cx
+    tag dy: Int = y - cy
+    if dx * dx + dy * dy <= radius * radius:
+      printOut("*")
+    else:
+      printOut(" ")
+  print("")

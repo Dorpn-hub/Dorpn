@@ -1,0 +1,34 @@
+# ----------------------------------------
+# conditionals.dpn — if / elif / else in Dorpn
+# Tested on Dorpn v0.4.1
+# ----------------------------------------
+
+# --- Basic if / elif / else ---
+tag age: Int = 20
+
+if age < 13:
+  print("You are a child.")
+elif age < 20:
+  print("You are a teenager.")
+else:
+  print("You are an adult.")
+
+# --- Combining conditions with and / or ---
+tag score: Int = 85
+tag attendance: Int = 90
+
+if score >= 80 and attendance >= 75:
+  print("Eligible for distinction.")
+else:
+  print("Not eligible for distinction.")
+
+# --- Advanced: grouped conditions using parentheses ---
+# Parentheses create a proper grouped sub-expression, so precedence
+# between 'and' / 'or' is fully respected here.
+tag i: Int = 4
+tag j: Int = 4
+
+if (i == j) or (i + j == 8 and i != 0):
+  print("Condition matched!")
+else:
+  print("Condition not matched.")

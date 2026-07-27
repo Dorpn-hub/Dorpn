@@ -1,0 +1,32 @@
+# ----------------------------------------
+# functions.dpn — basic and advanced functions
+# Tested on Dorpn v0.4.1
+# ----------------------------------------
+
+# --- Basic function ---
+func square(x: Int):
+  return x * x
+
+print(square(5))
+
+# --- Function with explicit return type ---
+func greet(name: String) -> String:
+  return name
+
+printOut("Hello, ")
+print(greet("Dorpn"))
+
+# --- Function with multiple parameters ---
+func add2(a: Int, b: Int) -> Int:
+  return a + b
+
+print(add2(4, 7))
+
+# --- Advanced: recursive function ---
+func factorial(n: Int) -> Int:
+  if n <= 1:
+    return 1
+  else:
+    return n * factorial(n - 1)
+
+print(factorial(5))

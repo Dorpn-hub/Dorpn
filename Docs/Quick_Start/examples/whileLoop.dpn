@@ -1,0 +1,29 @@
+# ----------------------------------------
+# whileLoop.dpn — keep loop (while), halt (break), skip (continue)
+# Tested on Dorpn v0.4.1
+# ----------------------------------------
+
+# --- Basic keep loop (runs until condition becomes false) ---
+print("--- Basic keep ---")
+tag counter: Int = 0
+keep counter < 5:
+  print(counter)
+  counter = counter + 1
+
+# --- keep + halt (break) ---
+print("--- keep with halt ---")
+tag n: Int = 0
+keep n < 100:
+  if n == 5:
+    halt
+  print(n)
+  n = n + 1
+
+# --- keep + skip (continue) ---
+print("--- keep with skip (odd numbers only) ---")
+tag m: Int = 0
+keep m < 10:
+  m = m + 1
+  if m % 2 == 0:
+    skip
+  print(m)

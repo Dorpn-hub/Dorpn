@@ -1,0 +1,51 @@
+# ----------------------------------------
+# Var_Types.dpn — tag, Const, types, print vs printOut, ANSI colors
+# Tested on Dorpn v0.4.1
+# ----------------------------------------
+
+# --- tag (mutable variable) ---
+tag age: Int = 21
+age = age + 1
+print(age)
+
+# --- Const (immutable, reassigning this would be a semantic error) ---
+Const pi: Float = 3.14159
+print(pi)
+
+# --- Basic types ---
+tag isActive: Bool = true
+tag price: Float = 99.99
+tag username: String = "Dorpn_User"
+
+print(isActive)
+print(price)
+print(username)
+
+# --- print() vs printOut() ---
+print("print() adds a newline after this.")
+printOut("printOut() does NOT add a newline, ")
+printOut("so this stays on the same line.")
+print("")
+
+# --- ASCII colors using ANSI escape codes ---
+# \033 is the octal escape for ESC (0x1B) — this is how you build
+# ANSI color codes in Dorpn, since there's no dedicated color keyword.
+Const RED: String = "\033[31m"
+Const GREEN: String = "\033[32m"
+Const YELLOW: String = "\033[33m"
+Const RESET: String = "\033[0m"
+
+printOut(RED)
+printOut("This is red text")
+printOut(RESET)
+print("")
+
+printOut(GREEN)
+printOut("This is green text")
+printOut(RESET)
+print("")
+
+printOut(YELLOW)
+printOut("This is yellow text")
+printOut(RESET)
+print("")
