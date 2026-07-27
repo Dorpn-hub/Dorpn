@@ -34,22 +34,10 @@
 - **Characteristics**: UTF-8 encoded, mutable via methods, automatic memory management
 - **Examples**: "hello", "Line 1\nLine 2", "" (empty)
 
-### String32
-
-- **Purpose**: Text data with 32-bit alignment
-- **Characteristics**: 32-bit aligned string, UTF-8 encoded
-- **Examples**: "hello", "Dorpn", "" (empty)
-
 ### Bool
 
 - **Purpose**: Logical/boolean values
 - **Characteristics**: Binary true/false state, used in conditions and logic
-- **Values**: Only true or false (case-sensitive)
-
-### Bool32
-
-- **Purpose**: Logical/boolean values with 32-bit representation
-- **Characteristics**: 32-bit boolean, binary true/false state
 - **Values**: Only true or false (case-sensitive)
 
 ---
@@ -58,7 +46,7 @@
 
 ### Case Sensitivity
 
-- ✓ Correct: `Int`, `Float`, `String`, `Bool`, `Int32`, `Float32`, `String32`, `Bool32`
+- ✓ Correct: `Int`, `Float`, `String`, `Bool`, `Int32`, `Float32`
 - ✗ Incorrect: int, FLOAT, string, BOOL, int32, FLOAT32
 
 ### Type Inference
@@ -76,7 +64,7 @@
 - Mixed operations: Int + Float → Float (promotion)
 - Mixed operations: Int32 + Float32 → Float32 (promotion)
 - String conversion: Any type + String → String
-- Boolean operators only work with Bool or Bool32 types
+- Boolean operators only work with Bool type
 - 32-bit and 64-bit types do not implicitly promote to each other
 
 ### Default Behaviors
@@ -96,9 +84,7 @@
 - `Float` → double (C) - 8 bytes
 - `Float32` → float (C) - 4 bytes
 - `String` → char* (C) - heap allocated, manual management
-- `String32` → char* (C) - 32-bit aligned, heap allocated
 - `Bool` → bool (C) - 1 byte
-- `Bool32` → int (C) - 4 bytes
 - No garbage collector - manual freeing in generated C code
 
 ---
@@ -122,8 +108,6 @@ tag is_ready: Bool = false
 ```py
 tag score: Int32 = 100
 tag temperature: Float32 = 36.6
-tag greeting: String32 = "Hello"
-tag is_ready: Bool32 = false
 ```
 
 ---
@@ -139,7 +123,7 @@ tag z = "text"       # Inferred as String
 tag flag = true      # Inferred as Bool
 ```
 
-> **Note:** 32-bit types (`Int32`, `Float32`, `String32`, `Bool32`) are never inferred. They must always be explicitly annotated.
+> **Note:** 32-bit types (`Int32`, `Float32`) are never inferred. They must always be explicitly annotated.
 
 ---
 
