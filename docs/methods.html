@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Built-in Methods — Dorpn Docs</title>
+  <meta name="description"
+    content="Dorpn built-in string methods: .repeat(), .alter(), .flip(), .size() — complete API reference with examples.">
+  <link rel="icon" href="../dpn-file-light.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <div class="bg-noise"></div>
+
+  <header class="topnav">
+    <button class="menu-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+    <a href="../index.html" class="brand"><span class="brand-mark"><img src="../dpn-file-light.png" alt="logo"></span>
+      Dorpn <span class="brand-version">v0.4.1</span></a>
+    <nav class="topnav-links">
+      <a href="../index.html">Home</a>
+      <a href="quickstart.html" class="active">Docs</a>
+      <a href="functions.html" class="active">API Reference</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="doc-search-input" placeholder="Search docs..." autocomplete="off">
+      <kbd>/</kbd>
+      <div class="search-results" id="doc-search-results"></div>
+    </div>
+    <a class="btn-github" href="https://github.com/Dorpn-hub/Dorpn" target="_blank" rel="noopener"><i
+        class="fa-brands fa-github"></i> GitHub</a>
+  </header>
+  <div class="sidebar-overlay"></div>
+
+  <div class="docs-shell">
+    <aside class="sidebar">
+      <div class="side-group">
+        <div class="side-group-title">Getting Started</div>
+        <a class="side-link" href="quickstart.html"><i class="fa-solid fa-rocket"></i> Quickstart Guide</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Language Guide</div>
+        <a class="side-link" href="variables.html"><i class="fa-solid fa-tag"></i> Variables &amp; Scope</a>
+        <a class="side-link" href="types.html"><i class="fa-solid fa-shapes"></i> Type System</a>
+        <a class="side-link" href="operators.html"><i class="fa-solid fa-calculator"></i> Operators</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">API Reference</div>
+        <a class="side-link" href="functions.html"><i class="fa-solid fa-cube"></i> Built-in Functions</a>
+        <a class="side-link active" href="methods.html"><i class="fa-solid fa-puzzle-piece"></i> Built-in Methods</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Help</div>
+        <a class="side-link" href="changelog.html"><i class="fa-solid fa-clock-rotate-left"></i> Changelog</a>
+        <a class="side-link" href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+        <a class="side-link" href="https://github.com/Dorpn-hub/Dorpn/releases" target="_blank" rel="noopener"><i
+            class="fa-solid fa-download"></i> Releases</a>
+      </div>
+    </aside>
+
+    <div class="content-col">
+      <article>
+        <span class="doc-eyebrow"><i class="fa-solid fa-puzzle-piece"></i> API Reference</span>
+        <h1>Built-in String Methods</h1>
+        <p class="lead">Method-style calls on <code>String</code> values, invoked with dot syntax:
+          <code>"string".method(args)</code>. All string methods are non-mutating — they always return a new string.
+        </p>
+
+        <h2 id="repeat">.repeat()</h2>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig">"string".<span class="tok-fn">repeat</span>(times)</span>
+            <span class="ref-badge method">Method</span>
+          </div>
+          <div class="ref-body">
+            <p>Creates a new string consisting of the original string repeated a specified number of times. Does not
+              insert separators between repetitions.</p>
+            <ul class="param-list">
+              <li><span class="param-name">times</span><span class="param-desc">An <code>Int</code> specifying how many
+                  times to repeat the string. Must be non-negative.</span></li>
+            </ul>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn">tag stars = "*".repeat(10)
+tag hello = "Hi ".repeat(3)
+print(stars)    # Output: **********
+print(hello)    # Output: Hi Hi Hi
+
+print("=".repeat(5))  # Output: =====</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="alter">.alter()</h2>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig">"string".<span class="tok-fn">alter</span>(target, replacement)</span>
+            <span class="ref-badge method">Method</span>
+          </div>
+          <div class="ref-body">
+            <p>Creates a new string by replacing occurrences of a substring with another substring. The original string
+              is not modified — <code>.alter()</code> always returns a new string.</p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn">tag text = "Hello World"
+tag new_text = text.alter("World", "Dorpn")
+print(new_text)  # "Hello Dorpn"</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="flip">.flip()</h2>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig">"string".<span class="tok-fn">flip</span>()</span>
+            <span class="ref-badge method">Method</span>
+          </div>
+          <div class="ref-body">
+            <p>Returns a new string with the characters of the original string reversed. Useful for palindrome
+              detection, formatting, and general string manipulation. Does not modify the original string — you must
+              assign or use the returned value.</p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn">tag reversed = "hello".flip()
+tag palindrome = "racecar".flip()
+print(reversed)    # "olleh"
+print(palindrome)    # "racecar"</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="size">.size()</h2>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig">"string".<span class="tok-fn">size</span>()</span>
+            <span class="ref-badge method">Method</span>
+          </div>
+          <div class="ref-body">
+            <p>Returns the length of a string, measured in the number of characters it contains. Always returns an
+              <code>Int</code>. Useful for validation, loops, and formatting tasks.
+            </p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn">tag length = "Hello".size()  # 5
+tag empty = "".size()        # 0
+
+# With variables
+tag name = "Alice"
+print("Name length:", name.size())</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout tip">
+          <i class="fa-solid fa-lightbulb"></i>
+          <div>
+            <div class="callout-title">Chaining</div>
+            <div class="callout-body">Because every string method returns a new <code>String</code>, calls can be
+              chained: <code>"dorpn".flip().repeat(2)</code> reverses the string, then repeats the result twice.</div>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <a class="page-link prev" href="functions.html">
+            <div class="pl-label">Previous</div>
+            <div class="pl-title"><i class="fa-solid fa-arrow-left"></i> Built-in Functions</div>
+          </a>
+          <a class="page-link next" href="changelog.html">
+            <div class="pl-label">Next</div>
+            <div class="pl-title">Changelog <i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+        <li><a href="#repeat">.repeat()</a></li>
+        <li><a href="#alter">.alter()</a></li>
+        <li><a href="#flip">.flip()</a></li>
+        <li><a href="#size">.size()</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="../js/search-index.js"></script>
+  <script src="../js/highlight.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

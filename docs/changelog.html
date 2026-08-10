@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — Dorpn Docs</title>
+  <meta name="description" content="What's new, changed, and fixed in each Dorpn release — starting with v0.4.1.">
+  <link rel="icon" href="../dpn-file-light.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <div class="bg-noise"></div>
+
+  <header class="topnav">
+    <button class="menu-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+    <a href="../index.html" class="brand"><span class="brand-mark"><img src="../dpn-file-light.png" alt="logo"></span>
+      Dorpn <span class="brand-version">v0.4.1</span></a>
+    <nav class="topnav-links">
+      <a href="../index.html">Home</a>
+      <a href="quickstart.html">Docs</a>
+      <a href="functions.html">API Reference</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="doc-search-input" placeholder="Search docs..." autocomplete="off">
+      <kbd>/</kbd>
+      <div class="search-results" id="doc-search-results"></div>
+    </div>
+    <a class="btn-github" href="https://github.com/Dorpn-hub/Dorpn" target="_blank" rel="noopener"><i
+        class="fa-brands fa-github"></i> GitHub</a>
+  </header>
+  <div class="sidebar-overlay"></div>
+
+  <div class="docs-shell">
+    <aside class="sidebar">
+      <div class="side-group">
+        <div class="side-group-title">Getting Started</div>
+        <a class="side-link" href="quickstart.html"><i class="fa-solid fa-rocket"></i> Quickstart Guide</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Language Guide</div>
+        <a class="side-link" href="variables.html"><i class="fa-solid fa-tag"></i> Variables &amp; Scope</a>
+        <a class="side-link" href="types.html"><i class="fa-solid fa-shapes"></i> Type System</a>
+        <a class="side-link" href="operators.html"><i class="fa-solid fa-calculator"></i> Operators</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">API Reference</div>
+        <a class="side-link" href="functions.html"><i class="fa-solid fa-cube"></i> Built-in Functions</a>
+        <a class="side-link" href="methods.html"><i class="fa-solid fa-puzzle-piece"></i> Built-in Methods</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Help</div>
+        <a class="side-link active" href="changelog.html"><i class="fa-solid fa-clock-rotate-left"></i> Changelog</a>
+        <a class="side-link" href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+        <a class="side-link" href="https://github.com/Dorpn-hub/Dorpn/releases" target="_blank" rel="noopener"><i
+            class="fa-solid fa-download"></i> Releases</a>
+      </div>
+    </aside>
+
+    <div class="content-col">
+      <article>
+        <span class="doc-eyebrow"><i class="fa-solid fa-clock-rotate-left"></i> Help</span>
+        <h1>Changelog</h1>
+        <p class="lead">Dorpn is growing up. <strong>v0.4.1</strong> introduces a self-updating compiler flag, while
+          locking down syntax and semantics for better discipline and squashing long-standing bugs.</p>
+
+        <h2 id="v041-new">v0.4.1 — What's New</h2>
+
+        <h3 id="upgrade-flag">New compiler flag — <code>--upgrade</code></h3>
+        <p>Dorpn can now update itself. The new <code>--upgrade</code> flag fetches the latest release straight from the
+          <a class="inline-link" href="https://github.com/Dorpn-hub/Dorpn" target="_blank" rel="noopener">official
+            GitHub repository</a> and replaces the existing Dorpn install on your system.
+        </p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">bash</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-bash">dorpn --upgrade</code></pre>
+        </div>
+
+        <h3 id="strict-colon">Strict colon syntax</h3>
+        <p>The colon <code>:</code> at the end of block headers — <code>if</code>, <code>elif</code>, <code>else</code>,
+          <code>func</code>, <code>loop</code>, and <code>keep</code> — is now <strong>required</strong>. Previously the
+          compiler would silently accept code without it, which led to inconsistency across codebases. Omitting the
+          colon is now a syntax error, and the compiler points to the exact line and column where it was expected.
+        </p>
+
+        <h3 id="strict-indent">Enforced indentation rules</h3>
+        <p>Dorpn now enforces a strict indentation policy. Only <strong>2 or 4 spaces</strong> are accepted per indent
+          level, and they must be used consistently throughout a block. Any other amount — 1 space, 3 spaces, tabs mixed
+          with spaces — produces a clear error at the offending line. The old behavior of printing a warning and
+          continuing silently has been removed entirely.</p>
+
+        <h3 id="multi-errors">Multiple errors reported at once</h3>
+        <p>Semantic analysis no longer stops at the first error it finds. All semantic errors in a file — type
+          mismatches, undefined variables, invalid reassignments — are now collected and reported together in a single
+          compiler run, instead of a fix-one-recompile-repeat cycle. Syntax-level errors from the lexer/parser still
+          report one at a time for now, since a single syntax error can invalidate the rest of the file structure.</p>
+
+        <h3 id="colored-errors">Colorful, categorized error output</h3>
+        <p>Compiler errors are now color-coded by category — <strong>Semantic</strong>, <strong>Syntax</strong>,
+          <strong>Lexor</strong>, and <strong>Indent</strong> errors each get a distinct colored heading.
+        </p>
+
+        <h3 id="strict-ask">Strict <code>ask()</code> prompt type</h3>
+        <p><code>ask()</code> now strictly requires its prompt argument to be a <code>String</code>, consistent with
+          Dorpn's compiled, statically-typed design. Passing an <code>Int</code>, <code>Bool</code>, or any other type
+          as the prompt now raises a clear Semantic Error instead of silently compiling into broken C output.</p>
+
+        <h2 id="v041-fixed">v0.4.1 — What's Fixed</h2>
+
+        <h3 id="fix-blank-line">Blank line on empty input in <code>ask()</code></h3>
+        <p>When using <code>ask()</code> to prompt for user input and the user pressed Enter on empty input, an empty
+          line would appear in the terminal before the next prompt. This was cosmetic but noticeable, especially in
+          loops that re-prompt until valid input is given. Fixed in both the <strong>C runtime</strong> and the
+          <strong>JavaScript runtime</strong> backends — empty input no longer leaves a gap.
+        </p>
+
+        <h3 id="fix-deprecated-removed">Deprecated types fully removed</h3>
+        <p><code>String32</code> and <code>Bool32</code> were marked deprecated in a previous release but continued to
+          work silently, with no warning, no error. They have now been fully removed from the lexer, parser, and type
+          system — using either name now correctly fails to compile.</p>
+
+        <h3 id="fix-invalid-type">Invalid type names no longer fail silently</h3>
+        <p>Declaring a variable, function parameter, or return type with an unrecognized type name (a typo, or a removed
+          type) used to be silently accepted as an untyped value, quietly bypassing all type-checking for that
+          declaration. This is now caught immediately as a Syntax Error, pointing to the exact line and column.</p>
+
+        <h3 id="fix-reassignment">Reassignment type checking was a no-op</h3>
+        <p>Reassigning an existing variable to a value of an incompatible type (e.g. <code>age = ask(...)</code> where
+          <code>age</code> was declared <code>Int</code>) was silently allowed — the compatibility check existed in code
+          but its result was never used. Reassignment now correctly enforces the variable's declared type.
+        </p>
+
+        <h3 id="fix-keep-loop">keep loops were never type-checked</h3>
+        <p>A significant bug: any code inside a <code>keep</code> block was completely skipped by semantic analysis — no
+          undefined-variable checks, no type mismatch checks, nothing. Errors inside loops went entirely undetected
+          until they either crashed at the C level or silently produced wrong output. <code>keep</code> bodies are now
+          fully analyzed like any other block.</p>
+
+        <h2 id="upgrading">Upgrading from v0.4.0</h2>
+        <p>If you have existing <code>.dpn</code> files, a few things to check before building:</p>
+        <ul>
+          <li>Add a <code>:</code> to the end of every block header line if it's missing.</li>
+          <li>Ensure all indentation uses either 2 or 4 spaces consistently.</li>
+          <li>If you were relying on <code>String32</code> or <code>Bool32</code>, switch to <code>String</code> /
+            <code>Bool</code> — the 32-bit variants no longer exist.
+          </li>
+          <li>Double-check any <code>ask(...)</code> calls where the prompt isn't a plain string literal — it must now
+            resolve to <code>String</code>.</li>
+          <li>Code inside <code>keep</code> blocks that previously "worked" despite type mistakes may now correctly fail
+            to compile — this is expected; it means bugs that were silently ignored before are now visible.</li>
+        </ul>
+        <div class="callout tip">
+          <i class="fa-solid fa-check"></i>
+          <div>
+            <div class="callout-title">Descriptive errors</div>
+            <div class="callout-body">The compiler errors are descriptive, so tracking down any issues introduced by
+              these stricter rules should be straightforward.</div>
+          </div>
+        </div>
+
+        <div class="callout note" style="margin-top:40px;">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <div class="callout-title">Community &amp; Support</div>
+            <div class="callout-body">For discussions, support, and updates, join the <a class="inline-link"
+                href="https://discord.gg/9J2qabs3gu" target="_blank" rel="noopener">official Discord server</a>.</div>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <a class="page-link prev" href="methods.html">
+            <div class="pl-label">Previous</div>
+            <div class="pl-title"><i class="fa-solid fa-arrow-left"></i> Built-in Methods</div>
+          </a>
+          <a class="page-link next" href="faq.html">
+            <div class="pl-label">Next</div>
+            <div class="pl-title">FAQ <i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+        <li><a href="#v041-new">v0.4.1 — New</a></li>
+        <li><a href="#upgrade-flag">--upgrade flag</a></li>
+        <li><a href="#strict-colon">Strict colon syntax</a></li>
+        <li><a href="#strict-indent">Indentation rules</a></li>
+        <li><a href="#multi-errors">Multiple errors</a></li>
+        <li><a href="#colored-errors">Colored errors</a></li>
+        <li><a href="#strict-ask">Strict ask()</a></li>
+        <li><a href="#v041-fixed">v0.4.1 — Fixed</a></li>
+        <li><a href="#upgrading">Upgrading Guide</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="../js/search-index.js"></script>
+  <script src="../js/highlight.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operators — Dorpn Docs</title>
+  <meta name="description"
+    content="Dorpn arithmetic, comparison and logical operators: +, -, *, /, fld, %, **, ==, !=, <, >, <=, >=, and, or, not.">
+  <link rel="icon" href="../dpn-file-light.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <div class="bg-noise"></div>
+
+  <header class="topnav">
+    <button class="menu-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+    <a href="../index.html" class="brand"><span class="brand-mark"><img src="../dpn-file-light.png" alt="logo"></span>
+      Dorpn <span class="brand-version">v0.4.1</span></a>
+    <nav class="topnav-links">
+      <a href="../index.html">Home</a>
+      <a href="quickstart.html" class="active">Docs</a>
+      <a href="functions.html">API Reference</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="doc-search-input" placeholder="Search docs..." autocomplete="off">
+      <kbd>/</kbd>
+      <div class="search-results" id="doc-search-results"></div>
+    </div>
+    <a class="btn-github" href="https://github.com/Dorpn-hub/Dorpn" target="_blank" rel="noopener"><i
+        class="fa-brands fa-github"></i> GitHub</a>
+  </header>
+  <div class="sidebar-overlay"></div>
+
+  <div class="docs-shell">
+    <aside class="sidebar">
+      <div class="side-group">
+        <div class="side-group-title">Getting Started</div>
+        <a class="side-link" href="quickstart.html"><i class="fa-solid fa-rocket"></i> Quickstart Guide</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Language Guide</div>
+        <a class="side-link" href="variables.html"><i class="fa-solid fa-tag"></i> Variables &amp; Scope</a>
+        <a class="side-link" href="types.html"><i class="fa-solid fa-shapes"></i> Type System</a>
+        <a class="side-link active" href="operators.html"><i class="fa-solid fa-calculator"></i> Operators</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">API Reference</div>
+        <a class="side-link" href="functions.html"><i class="fa-solid fa-cube"></i> Built-in Functions</a>
+        <a class="side-link" href="methods.html"><i class="fa-solid fa-puzzle-piece"></i> Built-in Methods</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Help</div>
+        <a class="side-link" href="changelog.html"><i class="fa-solid fa-clock-rotate-left"></i> Changelog</a>
+        <a class="side-link" href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+        <a class="side-link" href="https://github.com/Dorpn-hub/Dorpn/releases" target="_blank" rel="noopener"><i
+            class="fa-solid fa-download"></i> Releases</a>
+      </div>
+    </aside>
+
+    <div class="content-col">
+      <article>
+        <span class="doc-eyebrow"><i class="fa-solid fa-calculator"></i> Language Guide</span>
+        <h1>Operators</h1>
+        <p class="lead">Arithmetic, comparison, and logical operators — including string concatenation, floor division,
+          and short-circuit boolean logic.</p>
+
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Operators</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Arithmetic</td>
+                <td><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>fld</code> <code>%</code>
+                  <code>**</code></td>
+              </tr>
+              <tr>
+                <td>Comparison</td>
+                <td><code>==</code> <code>!=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code>
+                  <code>&gt;=</code></td>
+              </tr>
+              <tr>
+                <td>Logical</td>
+                <td><code>and</code> <code>or</code> <code>not</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="concat">String Conversion with <code>+</code></h2>
+        <p>The <code>+</code> operator is used not only for numeric addition but also for string concatenation. When one
+          of the operands is a string, the other operand is automatically converted to a string, and the two are joined
+          together. Concatenation does not add spaces automatically — you must include them explicitly.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag num = 42
+tag text = "The answer is " + num  # Auto-converted to string
+print(text)  # "The answer is 42"</code></pre>
+        </div>
+
+        <h2 id="add">Addition with <code>+</code></h2>
+        <p>When both operands are numbers, <code>+</code> performs numeric addition.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag num = 30
+tag num1 = 40
+tag total = num + num1
+print(total)  # Output: 70
+
+tag sum = 20 + 30 + 10
+print(sum)  # Output: 60
+
+tag price1 = 9.99
+tag price2 = 5.50
+tag total_price = price1 + price2
+print(total_price)  # Output: 15.49
+
+# Mixed Int and Float (Int promoted to Float)
+tag int_val = 10
+tag float_val = 3.14
+tag mixed_sum = int_val + float_val
+print(mixed_sum)  # Output: 13.14
+print(type(mixed_sum))  # Output: "Float"
+
+tag result = 50 + (-20)
+print(result)  # Output: 30</code></pre>
+        </div>
+
+        <h2 id="sub">Subtraction with <code>-</code></h2>
+        <p>The <code>-</code> operator performs numeric subtraction. Both operands must be numeric (<code>Int</code> or
+          <code>Float</code>).</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag difference = 100 - 45
+print(difference)  # Output: 55
+
+tag float_diff = 10.5 - 3.2
+print(float_diff)  # Output: 7.3
+
+tag negative = 20 - 50
+print(negative)  # Output: -30
+
+tag complex = 100 - 30 - 20
+print(complex)  # Output: 50
+
+tag int_num = 15
+tag float_num = 4.5
+tag mixed = int_num - float_num
+print(mixed)  # Output: 10.5
+print(type(mixed))  # Output: "Float"</code></pre>
+        </div>
+        <div class="callout danger">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <div>
+            <div class="callout-title">Compile error example</div>
+            <div class="callout-body">
+              <pre style="margin:8px 0 0;"><code class="lang-dorpn">tag text = "hello"
+tag num = 10
+tag error = text - num  # COMPILE ERROR: Cannot perform '-' on Strings</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="mul">Multiplication with <code>*</code></h2>
+        <p>The <code>*</code> operator performs numeric multiplication. Both operands must be numeric.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag product = 7 * 8
+print(product)  # Output: 56
+
+tag area = 5.5 * 3.0
+print(area)  # Output: 16.5
+
+tag neg_product = -5 * 3
+print(neg_product)  # Output: -15
+
+tag volume = 2 * 3 * 4
+print(volume)  # Output: 24
+
+tag int_val = 3
+tag float_val = 2.5
+tag mixed = int_val * float_val
+print(mixed)  # Output: 7.5</code></pre>
+        </div>
+
+        <h2 id="div">Division with <code>/</code></h2>
+        <p>The <code>/</code> operator performs floating-point division. It always returns a <code>Float</code>, even
+          when dividing two integers.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag result = 10 / 2
+print(result)   # Output: 5.0
+print(type(result))  # Output: "Float"
+
+tag float_result = 15.0 / 4.0
+print(float_result)  # Output: 3.75
+
+tag uneven = 7 / 3
+print(uneven)  # Output: 2.333333...
+
+tag decimal_div = 100 / 2.5
+print(decimal_div)  # Output: 40.0
+
+# Order of operations
+tag complex_div = 10 + 20 / 5
+print(complex_div)  # Output: 14.0 (20/5=4.0, +10=14.0)</code></pre>
+        </div>
+        <div class="callout warn">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <div class="callout-title">Division by zero</div>
+            <div class="callout-body">Division by zero will cause a runtime error (floating-point exception).</div>
+          </div>
+        </div>
+
+        <h2 id="fld">Floor Division with <code>fld</code></h2>
+        <p>The <code>fld</code> operator performs integer division, discarding any fractional part. It always returns an
+          <code>Int</code>.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag result = 10 fld 3
+print(result)   # Output: 3
+print(type(result))  # Output: "Int"
+
+tag even = 20 fld 4
+print(even)  # Output: 5
+
+# Negative numbers round toward negative infinity
+tag negative = -10 fld 3
+print(negative)  # Output: -4
+
+# Mixed types (Float gets floored first)
+tag mixed = 10.9 fld 2.5  # Same as: 10 fld 2
+print(mixed)  # Output: 5</code></pre>
+        </div>
+
+        <h2 id="mod">Modulo with <code>%</code></h2>
+        <p>The <code>%</code> operator returns the remainder of division. Works with both <code>Int</code> and
+          <code>Float</code>.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag remainder = 17 % 5
+print(remainder)  # Output: 2
+
+tag zero_remainder = 20 % 4
+print(zero_remainder)  # Output: 0
+
+tag float_remainder = 10.5 % 3.2
+print(float_remainder)  # Output: 0.9 (approximately)
+
+# Check for even/odd
+tag number = 42
+if number % 2 == 0:
+    print("Even number")  # Output: "Even number"
+else:
+    print("Odd number")
+
+# Wrapping values (circular buffer)
+tag index = 15
+tag size = 10
+tag wrapped = index % size
+print(wrapped)  # Output: 5</code></pre>
+        </div>
+
+        <h2 id="exp">Exponentiation with <code>**</code></h2>
+        <p>The <code>**</code> operator raises a number to a power. It always returns a <code>Float</code>.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag square = 5 ** 2
+print(square)   # Output: 25.0
+print(type(square))  # Output: "Float"
+
+tag power = 2.5 ** 3
+print(power)  # Output: 15.625
+
+# Negative exponent (reciprocal)
+tag reciprocal = 2 ** -1
+print(reciprocal)  # Output: 0.5
+
+# Square root (using 0.5 power)
+tag root = 16 ** 0.5
+print(root)  # Output: 4.0
+
+# Compound interest example
+tag principal = 1000.0
+tag rate = 1.05  # 5% growth
+tag years = 3
+tag future_value = principal * (rate ** years)
+print(future_value)  # Output: 1157.625</code></pre>
+        </div>
+
+        <h2 id="eq">Equality Comparison with <code>==</code></h2>
+        <p>Checks if two values are equal. Returns <code>Bool</code>.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag is_equal = 10 == 10
+print(is_equal)  # Output: true
+
+tag str_eq = "hello" == "hello"
+print(str_eq)  # Output: true
+
+# Case-sensitive string comparison
+tag case_eq = "Hello" == "hello"
+print(case_eq)  # Output: false
+
+# Type mismatch (always false)
+tag mismatch = 10 == "10"
+print(mismatch)  # Output: false
+
+tag score = 85
+if score == 100:
+    print("Perfect!")
+elif score == 0:
+    print("Try again!")</code></pre>
+        </div>
+
+        <h2 id="neq">Inequality Comparison with <code>!=</code></h2>
+        <p>Checks if two values are NOT equal. Returns <code>Bool</code>.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag not_equal = 10 != 5
+print(not_equal)  # Output: true
+
+# Input validation example
+tag password = ask("Enter password: ")
+if password != "secret123":
+    print("Access denied")
+    halt
+print("Access granted")</code></pre>
+        </div>
+
+        <h2 id="lt">Less Than with <code>&lt;</code></h2>
+        <p>Checks if the left value is less than the right value. Returns <code>Bool</code>. Strings are compared
+          lexicographically.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag less = 5 < 10
+print(less)  # Output: true
+
+tag str_less = "apple" < "banana"
+print(str_less)  # Output: true (alphabetical order)
+
+# Case matters — uppercase < lowercase in ASCII
+tag case_less = "Apple" < "apple"
+print(case_less)  # Output: true
+
+tag age = 16
+if age < 18:
+    print("Underage")  # Output: "Underage"</code></pre>
+        </div>
+
+        <h2 id="gt">Greater Than with <code>&gt;</code></h2>
+        <p>Checks if the left value is greater than the right value. Returns <code>Bool</code>.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag greater = 15 > 10
+print(greater)  # Output: true
+
+tag a = 30
+tag b = 20
+if a > b:
+    tag max_val = a
+else:
+    tag max_val = b
+print(max_val)  # Output: 30</code></pre>
+        </div>
+
+        <h2 id="lte">Less Than or Equal with <code>&lt;=</code></h2>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag equal_case = 10 <= 10
+print(equal_case)  # Output: true
+
+# Array bounds checking
+tag index = 9
+tag size = 10
+if index <= size - 1:
+    print("Valid index")  # Output: "Valid index"</code></pre>
+        </div>
+
+        <h2 id="gte">Greater Than or Equal with <code>&gt;=</code></h2>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag score = 85
+if score >= 90:
+    print("Grade: A")
+elif score >= 80:
+    print("Grade: B")  # Output: "Grade: B"
+elif score >= 70:
+    print("Grade: C")</code></pre>
+        </div>
+
+        <h2 id="and">Logical AND with <code>and</code></h2>
+        <p>Performs logical conjunction. Returns <code>Bool</code>. Both operands must be boolean.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag result = true and true
+print(result)  # Output: true
+
+tag age = 25
+if age >= 18 and age <= 65:
+    print("Working age")  # Output: "Working age"
+
+tag a = true
+tag b = true
+tag c = false
+tag multi = a and b and c
+print(multi)  # Output: false</code></pre>
+        </div>
+        <div class="callout note">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <div class="callout-title">Short-circuit evaluation</div>
+            <div class="callout-body">Dorpn uses short-circuit evaluation for <code>and</code>. If the left operand is
+              false, the right operand is not evaluated.</div>
+          </div>
+        </div>
+
+        <h2 id="or">Logical OR with <code>or</code></h2>
+        <p>Performs logical disjunction. Returns <code>Bool</code>. Both operands must be boolean.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag result = true or false
+print(result)  # Output: true
+
+tag input = ask("Enter yes or no: ")
+if input == "yes" or input == "no":
+    print("Valid input")
+else:
+    print("Invalid input")
+
+tag option = "C"
+if option == "A" or option == "B" or option == "C":
+    print("Valid option")  # Output: "Valid option"</code></pre>
+        </div>
+        <div class="callout note">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <div class="callout-title">Short-circuit evaluation</div>
+            <div class="callout-body">Uses short-circuit evaluation for <code>or</code> too. If the left operand is
+              true, the right operand is not evaluated.</div>
+          </div>
+        </div>
+
+        <h2 id="not">Logical NOT with <code>not</code></h2>
+        <p>Performs logical negation. Returns <code>Bool</code>. The operand must be boolean.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag result = not true
+print(result)  # Output: false
+
+tag logged_in = false
+if not logged_in:
+    print("Please log in")  # Output: "Please log in"
+
+# Combined with AND/OR
+tag a = true
+tag b = false
+tag combined = not (a and b)
+print(combined)  # Output: true
+
+# Toggle logic
+tag enabled = true
+enabled = not enabled  # Toggle to false
+print(enabled)  # Output: false</code></pre>
+        </div>
+        <div class="callout warn">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <div class="callout-title">Precedence</div>
+            <div class="callout-body"><code>not</code> has higher precedence than <code>and</code> and <code>or</code>.
+              Use parentheses when needed to make intent explicit.</div>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <a class="page-link prev" href="types.html">
+            <div class="pl-label">Previous</div>
+            <div class="pl-title"><i class="fa-solid fa-arrow-left"></i> Type System</div>
+          </a>
+          <a class="page-link next" href="functions.html">
+            <div class="pl-label">Next</div>
+            <div class="pl-title">Built-in Functions <i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+        <li><a href="#concat">String Conversion +</a></li>
+        <li><a href="#add">Addition +</a></li>
+        <li><a href="#sub">Subtraction -</a></li>
+        <li><a href="#mul">Multiplication *</a></li>
+        <li><a href="#div">Division /</a></li>
+        <li><a href="#fld">Floor Division fld</a></li>
+        <li><a href="#mod">Modulo %</a></li>
+        <li><a href="#exp">Exponentiation **</a></li>
+        <li><a href="#eq">Equality ==</a></li>
+        <li><a href="#neq">Inequality !=</a></li>
+        <li><a href="#lt">Less Than &lt;</a></li>
+        <li><a href="#gt">Greater Than &gt;</a></li>
+        <li><a href="#lte">Less/Equal &lt;=</a></li>
+        <li><a href="#gte">Greater/Equal &gt;=</a></li>
+        <li><a href="#and">Logical AND</a></li>
+        <li><a href="#or">Logical OR</a></li>
+        <li><a href="#not">Logical NOT</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="../js/search-index.js"></script>
+  <script src="../js/highlight.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Type System — Dorpn Docs</title>
+  <meta name="description"
+    content="Dorpn's six built-in types: Int, Int32, Float, Float32, String, Bool — type annotations, inference, safety rules, and the underlying C memory model.">
+  <link rel="icon" href="../dpn-file-light.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <div class="bg-noise"></div>
+
+  <header class="topnav">
+    <button class="menu-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+    <a href="../index.html" class="brand"><span class="brand-mark"><img src="../dpn-file-light.png" alt="logo"></span>
+      Dorpn <span class="brand-version">v0.4.1</span></a>
+    <nav class="topnav-links">
+      <a href="../index.html">Home</a>
+      <a href="quickstart.html" class="active">Docs</a>
+      <a href="functions.html">API Reference</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="doc-search-input" placeholder="Search docs..." autocomplete="off">
+      <kbd>/</kbd>
+      <div class="search-results" id="doc-search-results"></div>
+    </div>
+    <a class="btn-github" href="https://github.com/Dorpn-hub/Dorpn" target="_blank" rel="noopener"><i
+        class="fa-brands fa-github"></i> GitHub</a>
+  </header>
+  <div class="sidebar-overlay"></div>
+
+  <div class="docs-shell">
+    <aside class="sidebar">
+      <div class="side-group">
+        <div class="side-group-title">Getting Started</div>
+        <a class="side-link" href="quickstart.html"><i class="fa-solid fa-rocket"></i> Quickstart Guide</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Language Guide</div>
+        <a class="side-link" href="variables.html"><i class="fa-solid fa-tag"></i> Variables &amp; Scope</a>
+        <a class="side-link active" href="types.html"><i class="fa-solid fa-shapes"></i> Type System</a>
+        <a class="side-link" href="operators.html"><i class="fa-solid fa-calculator"></i> Operators</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">API Reference</div>
+        <a class="side-link" href="functions.html"><i class="fa-solid fa-cube"></i> Built-in Functions</a>
+        <a class="side-link" href="methods.html"><i class="fa-solid fa-puzzle-piece"></i> Built-in Methods</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Help</div>
+        <a class="side-link" href="changelog.html"><i class="fa-solid fa-clock-rotate-left"></i> Changelog</a>
+        <a class="side-link" href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+        <a class="side-link" href="https://github.com/Dorpn-hub/Dorpn/releases" target="_blank" rel="noopener"><i
+            class="fa-solid fa-download"></i> Releases</a>
+      </div>
+    </aside>
+
+    <div class="content-col">
+      <article>
+        <span class="doc-eyebrow"><i class="fa-solid fa-shapes"></i> Language Guide</span>
+        <h1>Type System</h1>
+        <p class="lead">Six built-in types. Strict rules. Compile-time safety. Here's how Dorpn's static type system
+          works, from annotations to the underlying C memory model.</p>
+
+        <h2 id="core-types">Core Types</h2>
+        <p>Dorpn has four primary types, plus 32-bit counterparts for the two numeric ones — six built-in types in
+          total.</p>
+
+        <div class="ref-card">
+          <div class="ref-card-head"><span class="ref-sig">Int</span><span class="ref-badge type">Type</span></div>
+          <div class="ref-body">
+            <p><strong>Purpose:</strong> Whole numbers (positive, negative, or zero)</p>
+            <p><strong>Characteristics:</strong> 64-bit signed integer, no decimal point</p>
+            <p><strong>Examples:</strong> <code>42</code>, <code>-100</code>, <code>0</code>, <code>1_000_000</code></p>
+          </div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-card-head"><span class="ref-sig">Int32</span><span class="ref-badge type">Type</span></div>
+          <div class="ref-body">
+            <p><strong>Purpose:</strong> The 32-bit counterpart to <code>Int</code> — a whole number with a smaller
+              memory footprint</p>
+            <p><strong>Characteristics:</strong> 32-bit signed integer; must be declared explicitly with
+              <code>:Int32</code> — never inferred from a bare literal
+            </p>
+            <p><strong>Examples:</strong> <code>tag id :Int32 = 1000</code></p>
+          </div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-card-head"><span class="ref-sig">Float</span><span class="ref-badge type">Type</span></div>
+          <div class="ref-body">
+            <p><strong>Purpose:</strong> Decimal numbers and scientific notation</p>
+            <p><strong>Characteristics:</strong> Double-precision floating point, includes decimal point</p>
+            <p><strong>Examples:</strong> <code>3.14</code>, <code>-2.5</code>, <code>0.0</code>, <code>1.23e-4</code>
+            </p>
+          </div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-card-head"><span class="ref-sig">Float32</span><span class="ref-badge type">Type</span></div>
+          <div class="ref-body">
+            <p><strong>Purpose:</strong> The 32-bit counterpart to <code>Float</code> — single-precision, smaller memory
+              footprint</p>
+            <p><strong>Characteristics:</strong> 32-bit floating point; must be declared explicitly with
+              <code>:Float32</code> — never inferred from a bare literal
+            </p>
+            <p><strong>Examples:</strong> <code>tag ratio :Float32 = 1.5</code></p>
+          </div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-card-head"><span class="ref-sig">String</span><span class="ref-badge type">Type</span></div>
+          <div class="ref-body">
+            <p><strong>Purpose:</strong> Text data and character sequences</p>
+            <p><strong>Characteristics:</strong> UTF-8 encoded, mutable via methods, automatic memory management</p>
+            <p><strong>Examples:</strong> <code>"hello"</code>, <code>"Line 1\nLine 2"</code>, <code>""</code> (empty)
+            </p>
+          </div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-card-head"><span class="ref-sig">Bool</span><span class="ref-badge type">Type</span></div>
+          <div class="ref-body">
+            <p><strong>Purpose:</strong> Logical/boolean values</p>
+            <p><strong>Characteristics:</strong> Binary true/false state, used in conditions and logic</p>
+            <p><strong>Values:</strong> Only <code>true</code> or <code>false</code> (case-sensitive)</p>
+          </div>
+        </div>
+
+        <div class="callout note">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <div class="callout-title">Bool32 and String32 no longer exist</div>
+            <div class="callout-body">Earlier pre-releases experimented with 32-bit
+              <code>Bool32</code>/<code>String32</code> variants. They were removed in v0.4.1 — <code>Bool</code> and
+              <code>String</code> are the only boolean/text types now. See <a class="inline-link"
+                href="changelog.html">the Changelog</a> for details.
+            </div>
+          </div>
+        </div>
+
+        <h2 id="key-rules">Key Rules Summary</h2>
+
+        <h3>Case sensitivity</h3>
+        <div class="callout tip">
+          <i class="fa-solid fa-check"></i>
+          <div>
+            <div class="callout-title">Correct</div>
+            <div class="callout-body"><code>Int</code>, <code>Int32</code>, <code>Float</code>, <code>Float32</code>,
+              <code>String</code>, <code>Bool</code>
+            </div>
+          </div>
+        </div>
+        <div class="callout danger">
+          <i class="fa-solid fa-xmark"></i>
+          <div>
+            <div class="callout-title">Incorrect</div>
+            <div class="callout-body"><code>int</code>, <code>int32</code>, <code>FLOAT</code>, <code>float32</code>,
+              <code>string</code>, <code>BOOL</code>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="annotations">Type annotations (optional)</h3>
+        <p>You can optionally specify types explicitly (case-sensitive). The 32-bit variants are <strong>always</strong>
+          written explicitly — there's no shorthand for them:</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag score: Int = 100
+tag userId: Int32 = 20481
+tag temperature: Float = 36.6
+tag ratio: Float32 = 1.5
+tag greeting: String = "Hello"
+tag is_ready: Bool = false</code></pre>
+        </div>
+
+        <h3 id="inference">Type inference</h3>
+        <p>Dorpn automatically infers types from values when no annotation is given:</p>
+        <ul>
+          <li>Literal numbers without a decimal point → <code>Int</code></li>
+          <li>Literal numbers with a decimal point → <code>Float</code></li>
+          <li>Text in quotes → <code>String</code></li>
+          <li><code>true</code>/<code>false</code> → <code>Bool</code></li>
+        </ul>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag x = 10           # Inferred as Int
+tag y = 3.14         # Inferred as Float
+tag z = "text"       # Inferred as String
+tag flag = true      # Inferred as Bool</code></pre>
+        </div>
+        <div class="callout warn">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <div class="callout-title">Int32 and Float32 are never inferred</div>
+            <div class="callout-body">A bare numeric literal always infers to <code>Int</code> or <code>Float</code>. If
+              you want the 32-bit variant, you must annotate it explicitly — <code>tag x: Int32 = 10</code>, not
+              <code>tag x = 10</code>.
+            </div>
+          </div>
+        </div>
+
+        <h2 id="safety">Type Safety &amp; Promotion</h2>
+        <p>Once declared or inferred, a variable's type cannot change. Mixed numeric operations promote <code>Int</code>
+          to <code>Float</code>; combining any value with a <code>String</code> via <code>+</code> converts it to a
+          string.</p>
+
+        <h3>Numeric types working together</h3>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag a = 5            # Int
+tag b = 5.0          # Float
+tag c = a + b        # Result: Float (10.0)
+
+# Int and Float can work together
+tag result = a * b   # Float (25.0)</code></pre>
+        </div>
+
+        <h3>Type safety violations</h3>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag x: Int = "hello"  # ERROR: Type mismatch!
+
+tag y = 10
+y = 3.14     # ERROR: Int cannot become Float!
+
+tag z: Int32 = 10
+z = 10       # ERROR: Int cannot become Int32 — types must match exactly!</code></pre>
+        </div>
+
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Rule</th>
+                <th>Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Division (<code>/</code>)</td>
+                <td>Always returns <code>Float</code></td>
+              </tr>
+              <tr>
+                <td>Floor division (<code>fld</code>)</td>
+                <td>Always returns <code>Int</code></td>
+              </tr>
+              <tr>
+                <td>Exponentiation (<code>**</code>)</td>
+                <td>Always returns <code>Float</code></td>
+              </tr>
+              <tr>
+                <td>String concatenation</td>
+                <td>Uses the <code>+</code> operator</td>
+              </tr>
+              <tr>
+                <td>String manipulation</td>
+                <td>Uses <code>.method()</code> calls</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="memory">Memory &amp; Performance Notes</h2>
+        <p>Every Dorpn type maps directly onto a native C type in the generated code — this is what gives Dorpn its
+          performance profile. The 32-bit variants exist specifically to halve the footprint of the numeric types when
+          you don't need the full 64-bit range or double precision.</p>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Dorpn Type</th>
+                <th>C Representation</th>
+                <th>Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Int</code></td>
+                <td><code>long long</code></td>
+                <td>8 bytes</td>
+              </tr>
+              <tr>
+                <td><code>Int32</code></td>
+                <td><code>int32_t</code></td>
+                <td>4 bytes</td>
+              </tr>
+              <tr>
+                <td><code>Float</code></td>
+                <td><code>double</code></td>
+                <td>8 bytes</td>
+              </tr>
+              <tr>
+                <td><code>Float32</code></td>
+                <td><code>float</code></td>
+                <td>4 bytes</td>
+              </tr>
+              <tr>
+                <td><code>String</code></td>
+                <td><code>char*</code></td>
+                <td>heap allocated, manually managed</td>
+              </tr>
+              <tr>
+                <td><code>Bool</code></td>
+                <td><code>bool</code></td>
+                <td>1 byte</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout note">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <div class="callout-title">No garbage collector</div>
+            <div class="callout-body">Dorpn has no garbage collector — memory is freed deterministically via manual
+              management in the generated C code.</div>
+          </div>
+        </div>
+
+        <h2 id="variants">32-bit Variants — When to Use Them</h2>
+        <p>Reach for <code>Int32</code> / <code>Float32</code> over the default <code>Int</code> / <code>Float</code>
+          when you're working with large arrays of numbers and want to cut memory usage in half, matching a fixed-width
+          format from another system, or optimizing for cache/word-alignment in performance-sensitive code. For everyday
+          variables, the default 64-bit <code>Int</code> and <code>Float</code> remain the simplest choice.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag a :Int      = 1000
+tag b :Int32    = 1000
+
+tag c :Float    = 3.141592
+tag d :Float32  = 3.141592
+
+print(type(a), type(b))
+print(type(c), type(d))</code></pre>
+        </div>
+        <div class="callout warn">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <div class="callout-title">Bool32 and String32 removed in v0.4.1</div>
+            <div class="callout-body"><code>Bool32</code> and <code>String32</code> were deprecated in earlier
+              pre-releases and have now been <strong>fully removed</strong> from the lexer, parser, and type system —
+              using either name now correctly fails to compile with a clear error, instead of silently continuing.
+              Replace <code>Bool32</code> with <code>Bool</code> and <code>String32</code> with <code>String</code>.
+              <code>Int32</code> and <code>Float32</code> are <strong>not</strong> affected and remain valid 32-bit
+              types.
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <a class="page-link prev" href="variables.html">
+            <div class="pl-label">Previous</div>
+            <div class="pl-title"><i class="fa-solid fa-arrow-left"></i> Variables &amp; Scope</div>
+          </a>
+          <a class="page-link next" href="operators.html">
+            <div class="pl-label">Next</div>
+            <div class="pl-title">Operators <i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+        <li><a href="#core-types">Core Types</a></li>
+        <li><a href="#key-rules">Key Rules Summary</a></li>
+        <li><a href="#annotations">Type Annotations</a></li>
+        <li><a href="#inference">Type Inference</a></li>
+        <li><a href="#safety">Type Safety</a></li>
+        <li><a href="#memory">Memory &amp; Performance</a></li>
+        <li><a href="#variants">32-bit Variants</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="../js/search-index.js"></script>
+  <script src="../js/highlight.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

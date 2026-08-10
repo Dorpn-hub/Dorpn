@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Built-in Functions — Dorpn Docs</title>
+  <meta name="description"
+    content="Dorpn built-in functions: print, ask, type, abs, min, max, add, and Onload — complete API reference with examples.">
+  <link rel="icon" href="../dpn-file-light.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <div class="bg-noise"></div>
+
+  <header class="topnav">
+    <button class="menu-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+    <a href="../index.html" class="brand"><span class="brand-mark"><img src="../dpn-file-light.png" alt="logo"></span>
+      Dorpn <span class="brand-version">v0.4.1</span></a>
+    <nav class="topnav-links">
+      <a href="../index.html">Home</a>
+      <a href="quickstart.html" class="active">Docs</a>
+      <a href="functions.html" class="active">API Reference</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="doc-search-input" placeholder="Search docs..." autocomplete="off">
+      <kbd>/</kbd>
+      <div class="search-results" id="doc-search-results"></div>
+    </div>
+    <a class="btn-github" href="https://github.com/Dorpn-hub/Dorpn" target="_blank" rel="noopener"><i
+        class="fa-brands fa-github"></i> GitHub</a>
+  </header>
+  <div class="sidebar-overlay"></div>
+
+  <div class="docs-shell">
+    <aside class="sidebar">
+      <div class="side-group">
+        <div class="side-group-title">Getting Started</div>
+        <a class="side-link" href="quickstart.html"><i class="fa-solid fa-rocket"></i> Quickstart Guide</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Language Guide</div>
+        <a class="side-link" href="variables.html"><i class="fa-solid fa-tag"></i> Variables &amp; Scope</a>
+        <a class="side-link" href="types.html"><i class="fa-solid fa-shapes"></i> Type System</a>
+        <a class="side-link" href="operators.html"><i class="fa-solid fa-calculator"></i> Operators</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">API Reference</div>
+        <a class="side-link active" href="functions.html"><i class="fa-solid fa-cube"></i> Built-in Functions</a>
+        <a class="side-link" href="methods.html"><i class="fa-solid fa-puzzle-piece"></i> Built-in Methods</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Help</div>
+        <a class="side-link" href="changelog.html"><i class="fa-solid fa-clock-rotate-left"></i> Changelog</a>
+        <a class="side-link" href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+        <a class="side-link" href="https://github.com/Dorpn-hub/Dorpn/releases" target="_blank" rel="noopener"><i
+            class="fa-solid fa-download"></i> Releases</a>
+      </div>
+    </aside>
+
+    <div class="content-col">
+      <article>
+        <span class="doc-eyebrow"><i class="fa-solid fa-cube"></i> API Reference</span>
+        <h1>Built-in Functions</h1>
+        <p class="lead">The complete set of globally available functions in Dorpn — for I/O, type inspection, and math.
+        </p>
+
+        <h2 id="print">print(exp)</h2>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig"><span class="tok-fn">print</span>(exp)</span>
+            <span class="ref-badge fn">Function</span>
+          </div>
+          <div class="ref-body">
+            <p>The <code>print</code> built-in is used to display output to the console. It is one of the most commonly
+              used functions in the language and is typically the first step in learning how to interact with programs.
+            </p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn"># Single value
+print("Hello")
+
+# Multiple values (space-separated)
+print("Value:", x, "Result:", result)</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="printout">printOut(exp) <span class="tag-new-inline">v0.4.0+</span></h2>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig"><span class="tok-fn">printOut</span>(exp)</span>
+            <span class="ref-badge fn">Function</span>
+          </div>
+          <div class="ref-body">
+            <p>Same as <code>print</code>, but writes output <strong>without a trailing newline</strong>. Useful for
+              building output across multiple calls on a single line — progress indicators, prompts, or manually
+              controlled formatting.</p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn">printOut("Loading")
+printOut(".")
+printOut(".")
+printOut(".")
+print(" done")   # print() still adds the newline at the end
+# Output: Loading... done</code></pre>
+            </div>
+            <ul class="param-list">
+              <li><span class="param-name">exp</span><span class="param-desc">One or more values to write — same
+                  argument rules as <code>print</code>.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 id="ask">ask()</h2>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig"><span class="tok-fn">ask</span>(prompt)</span>
+            <span class="ref-badge fn">Function</span>
+          </div>
+          <div class="ref-body">
+            <p>The <code>ask</code> built-in is used to receive input from the user during program execution. It pauses
+              the program until the user provides a response, then returns that response as a <code>String</code>.</p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn"># Without prompt
+tag name = ask()
+
+# With prompt
+tag age = ask("Enter your age: ")
+
+# Always returns String
+tag input = ask("Say something: ")
+print("You said:", input)</code></pre>
+            </div>
+            <ul class="param-list">
+              <li><span class="param-name">prompt</span><span class="param-desc">(optional) A string message displayed
+                  to the user before waiting for input. If omitted, the program simply waits for input.</span></li>
+            </ul>
+            <div class="callout warn">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <div>
+                <div class="callout-title">Strict prompt type (v0.4.1+)</div>
+                <div class="callout-body"><code>ask()</code> now requires its prompt argument to be a
+                  <code>String</code>. Passing an <code>Int</code>, <code>Bool</code>, or any other type raises a
+                  Semantic Error instead of silently compiling into broken C output.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="type">type()</h2>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig"><span class="tok-fn">type</span>(value)</span>
+            <span class="ref-badge fn">Function</span>
+          </div>
+          <div class="ref-body">
+            <p>The <code>type</code> built-in is used to determine the data type of a value or variable at runtime. It
+              is especially useful when working with user input (from <code>ask</code>) or dynamic values, where the
+              type may not be immediately obvious.</p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn">print(type(42))      # "Int"
+print(type(3.14))    # "Float"
+print(type("text"))  # "String"
+print(type(true))    # "Bool"
+
+# Useful for debugging
+tag value = 100
+print("Type of value is:", type(value))</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="math">Mathematical Functions</h2>
+
+        <h3 id="abs">abs()</h3>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig"><span class="tok-fn">abs</span>(number)</span>
+            <span class="ref-badge math">Math</span>
+          </div>
+          <div class="ref-body">
+            <p>Returns the absolute value of a number (an <code>Int</code> or <code>Float</code>). If the number is
+              positive, it returns the same number; if negative, it returns its positive counterpart.</p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn">tag a = abs(-10)      # 10
+tag b = abs(-3.14)    # 3.14</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="minmax">min() / max()</h3>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig"><span class="tok-fn">min</span>(...args) / <span
+                class="tok-fn">max</span>(...args)</span>
+            <span class="ref-badge math">Math</span>
+          </div>
+          <div class="ref-body">
+            <p><code>min()</code> compares all arguments and returns the smallest one. <code>max()</code> compares all
+              arguments and returns the largest one. Works with <code>Int</code>, <code>Float</code>, and
+              <code>String</code> (lexicographic comparison).
+            </p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn">tag small = min(5, 10)  # 5
+tag large = max(5, 10)  # 10
+print(min("apple", "banana")) # Output: apple</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="add">add()</h3>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig"><span class="tok-fn">add</span>(...args)</span>
+            <span class="ref-badge math">Math</span>
+          </div>
+          <div class="ref-body">
+            <p>Returns the sum of all given arguments — an alternative to using <code>+</code>. Adds all numeric
+              arguments together and returns an <code>Int</code> or <code>Float</code> depending on the input.</p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn">tag sum = add(7, 3)
+print(sum)  # Output: 10
+
+tag num = add(2, 3.0)
+print(num)  # Output: 5.0</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="io">File I/O</h2>
+
+        <h3 id="onload">Onload()</h3>
+        <div class="ref-card">
+          <div class="ref-card-head">
+            <span class="ref-sig"><span class="tok-fn">Onload</span>(path)</span>
+            <span class="ref-badge io">File I/O</span>
+          </div>
+          <div class="ref-body">
+            <p>Loads the provided resource at compile time and reads the content of a file <strong>as String</strong>
+              from the given path.</p>
+            <div class="code-block">
+              <div class="code-head">
+                <div class="dots"><span></span><span></span><span></span></div><span
+                  class="lang-tag">dorpn</span><button class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+              </div>
+              <pre><code class="lang-dorpn"># Read entire file as string
+tag content = Onload("data.txt")
+print("File size:", content.size())
+
+# Error if file doesn't exist
+tag config = Onload("config.json")</code></pre>
+            </div>
+            <div class="callout warn">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <div>
+                <div class="callout-title">Compile-time resolution</div>
+                <div class="callout-body"><code>Onload()</code> resolves its path at compile time, not runtime — the
+                  referenced file must exist when you compile, not just when you run the resulting executable.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <a class="page-link prev" href="operators.html">
+            <div class="pl-label">Previous</div>
+            <div class="pl-title"><i class="fa-solid fa-arrow-left"></i> Operators</div>
+          </a>
+          <a class="page-link next" href="methods.html">
+            <div class="pl-label">Next</div>
+            <div class="pl-title">Built-in Methods <i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+        <li><a href="#print">print()</a></li>
+        <li><a href="#printout">printOut()</a></li>
+        <li><a href="#ask">ask()</a></li>
+        <li><a href="#type">type()</a></li>
+        <li><a href="#math">Math Functions</a></li>
+        <li><a href="#abs">abs()</a></li>
+        <li><a href="#minmax">min() / max()</a></li>
+        <li><a href="#add">add()</a></li>
+        <li><a href="#io">File I/O</a></li>
+        <li><a href="#onload">Onload()</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="../js/search-index.js"></script>
+  <script src="../js/highlight.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

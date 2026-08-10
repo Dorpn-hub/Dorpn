@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quickstart Guide — Dorpn Docs</title>
+  <meta name="description"
+    content="Get up and running with Dorpn: output, variables, input, conditionals, loops, functions, strings, types and the _Start() entry point.">
+  <link rel="icon" href="../dpn-file-light.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <div class="bg-noise"></div>
+
+  <header class="topnav">
+    <button class="menu-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+    <a href="../index.html" class="brand"><span class="brand-mark"><img src="../dpn-file-light.png" alt="logo"></span>
+      Dorpn <span class="brand-version">v0.4.1</span></a>
+    <nav class="topnav-links">
+      <a href="../index.html">Home</a>
+      <a href="quickstart.html" class="active">Docs</a>
+      <a href="functions.html">API Reference</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="doc-search-input" placeholder="Search docs..." autocomplete="off">
+      <kbd>/</kbd>
+      <div class="search-results" id="doc-search-results"></div>
+    </div>
+    <a class="btn-github" href="https://github.com/Dorpn-hub/Dorpn" target="_blank" rel="noopener"><i
+        class="fa-brands fa-github"></i> GitHub</a>
+  </header>
+  <div class="sidebar-overlay"></div>
+
+  <div class="docs-shell">
+    <aside class="sidebar">
+      <div class="side-group">
+        <div class="side-group-title">Getting Started</div>
+        <a class="side-link active" href="quickstart.html"><i class="fa-solid fa-rocket"></i> Quickstart Guide</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Language Guide</div>
+        <a class="side-link" href="variables.html"><i class="fa-solid fa-tag"></i> Variables &amp; Scope</a>
+        <a class="side-link" href="types.html"><i class="fa-solid fa-shapes"></i> Type System</a>
+        <a class="side-link" href="operators.html"><i class="fa-solid fa-calculator"></i> Operators</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">API Reference</div>
+        <a class="side-link" href="functions.html"><i class="fa-solid fa-cube"></i> Built-in Functions</a>
+        <a class="side-link" href="methods.html"><i class="fa-solid fa-puzzle-piece"></i> Built-in Methods</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Help</div>
+        <a class="side-link" href="changelog.html"><i class="fa-solid fa-clock-rotate-left"></i> Changelog</a>
+        <a class="side-link" href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+        <a class="side-link" href="https://github.com/Dorpn-hub/Dorpn/releases" target="_blank" rel="noopener"><i
+            class="fa-solid fa-download"></i> Releases</a>
+      </div>
+    </aside>
+
+    <div class="content-col">
+      <article>
+        <span class="doc-eyebrow"><i class="fa-solid fa-rocket"></i> Getting Started</span>
+        <h1>Quickstart Guide</h1>
+        <p class="lead">A quickstart guide to help you run <strong>Dorpn v0.4.0+</strong> programs on the go — from your
+          first <code>print()</code> to structured programs with <code>_Start()</code>.</p>
+
+        <h2 id="output">1. Output</h2>
+        <p>The <code>print()</code> function writes to stdout followed by a newline. Multiple arguments are separated by
+          a space automatically.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">print("Hello, World!")
+print("Score:", 100, "| Passed:", true)</code></pre>
+        </div>
+
+        <h2 id="variables">2. Variables &amp; Constants</h2>
+        <p>Use <code>tag</code> to declare a mutable variable. Dorpn infers the type from the assigned value, or you can
+          annotate it explicitly using <code>:Type</code>.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag name = "Jordan"
+tag age = 19
+tag temperature = 36.6
+tag active = true</code></pre>
+        </div>
+        <p>Explicit type annotation:</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag username :String = "Jordan"
+tag level    :Int    = 42
+tag rating   :Float  = 8.75
+tag verified :Bool   = false</code></pre>
+        </div>
+        <p>Use <code>Const</code> for values that must not change after declaration:</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">Const MAX_RETRIES = 5
+Const APP_NAME   = "MyApp"
+Const TAX_RATE   = 0.15</code></pre>
+        </div>
+
+        <h2 id="input">3. User Input</h2>
+        <p><code>ask()</code> reads a line from stdin and returns it as a <code>String</code>. The prompt is displayed
+          inline before input.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag username = ask("Enter your username: ")
+tag city     = ask("Enter your city: ")
+
+print("Welcome,", username)
+print("Location set to:", city)</code></pre>
+        </div>
+
+        <h2 id="conditionals">4. Conditional Logic</h2>
+        <p>Dorpn uses <code>if</code>, <code>elif</code>, and <code>else</code> for branching. Conditions are
+          indentation-scoped — no braces required.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag score = 85
+
+if score >= 90:
+    print("Grade: A")
+elif score >= 75:
+    print("Grade: B")
+elif score >= 60:
+    print("Grade: C")
+else:
+    print("Grade: F — please retry")</code></pre>
+        </div>
+        <p>Boolean expressions work directly as conditions:</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag isAdmin :Bool = true
+tag isVerified :Bool = false
+
+if isAdmin and isVerified:
+    print("Full access granted")
+elif isAdmin:
+    print("Admin access — verification pending")
+else:
+    print("Access denied")</code></pre>
+        </div>
+
+        <h2 id="loops">5. Loops</h2>
+        <p><strong>Fixed iteration loop:</strong></p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">loop 5:
+    print("Iteration running...")</code></pre>
+        </div>
+        <p><strong>Loop with an index variable:</strong></p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">loop i in 10:
+    print("Step", i)</code></pre>
+        </div>
+        <p><strong>Building a pattern with a loop:</strong></p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag height = 6
+
+loop row in height:
+    tag stars  = row * 2 + 1
+    tag spaces = height - row - 1
+    print(" ".repeat(spaces) + "*".repeat(stars))</code></pre>
+        </div>
+
+        <h2 id="keep">6. Keep — Conditional Loop</h2>
+        <p><code>keep</code> repeats a block as long as its condition holds. Use <code>halt</code> to exit the loop
+          early, and <code>skip</code> to jump to the next iteration.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag attempts = 0
+tag password = ask("Enter password: ")
+
+keep password != "secure123":
+    attempts = attempts + 1
+
+    if attempts >= 3:
+        print("Too many failed attempts. Exiting.")
+        halt
+
+    print("Wrong password. Try again.")
+    password = ask("Enter password: ")
+
+print("Access granted.")</code></pre>
+        </div>
+
+        <div class="callout note">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <div class="callout-title">halt vs skip</div>
+            <div class="callout-body"><code>halt</code> breaks out of the enclosing loop entirely. <code>skip</code>
+              jumps immediately to the next iteration, similar to <code>continue</code> in other languages.</div>
+          </div>
+        </div>
+
+        <h2 id="functions">7. Functions</h2>
+        <p>Functions are declared with <code>func</code>. Parameters require explicit type annotations. The return type
+          is specified after <code>-&gt;</code> when the function returns a value.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">func greet(name :String, role :String):
+    print("Welcome,", name)
+    print("Role assigned:", role)
+
+
+greet("Jordan", "Developer")</code></pre>
+        </div>
+        <p>Function with a return value:</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">func calculateTotal(price :Float, quantity :Int) -> Float:
+    return price * quantity
+
+
+tag total = calculateTotal(12.5, 4)
+print("Total cost:", total)</code></pre>
+        </div>
+        <p>Functions can call other functions:</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">func square(n :Int) -> Int:
+    return n * n
+
+func sumOfSquares(a :Int, b :Int) -> Int:
+    return square(a) + square(b)
+
+
+tag result = sumOfSquares(3, 4)
+print("Sum of squares:", result)</code></pre>
+        </div>
+
+        <h3 id="void">Functions with no return value — <code>void</code> <span class="tag-new-inline">v0.4.0+</span>
+        </h3>
+        <p>Use <code>void</code> after <code>-&gt;</code> to mark a function that intentionally returns nothing.</p>
+        <div class="callout warn">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <div class="callout-title">void is not a type</div>
+            <div class="callout-body"><code>void</code> is alternative of <strong>pass.</strong> It only exists in the
+              function body blocks, to
+              make the "returns nothing, on purpose" intent explicit and readable — it isn't part of Dorpn's type set
+              (<code>Int</code>, <code>Float</code>, <code>String</code>, <code>Bool</code>, and their 32-bit
+              counterparts).</div>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">func logStatus(msg :String):
+    void  #pass this function
+</code></pre>
+        </div>
+
+        <h2 id="strings">8. String Operations</h2>
+        <p>Strings support concatenation with <code>+</code>. Numbers are automatically coerced when combined with
+          strings.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag firstName = "Ada"
+tag lastName  = "Lovelace"
+tag fullName  = firstName + " " + lastName
+
+print(fullName)
+print("─".repeat(20))
+print("Characters:" , fullName)</code></pre>
+        </div>
+        <p>Built-in string methods:</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag word = "Dorpn"
+
+print(word.flip())              # nproD
+print(word.alter("D", "d"))    # dorpn
+print("*".repeat(15))          # ***************</code></pre>
+        </div>
+
+        <h2 id="types32">9. Types &amp; 32-bit Variants</h2>
+        <p>Dorpn supports standard types and their 32-bit counterparts for lower memory usage.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag a :Int      = 1000
+tag b :Int32    = 1000
+
+tag c :Float    = 3.141592
+tag d :Float32  = 3.141592
+
+tag e :String   = "Hello"
+tag g :Bool     = true
+
+print(type(a), type(b))
+print(type(c), type(d))</code></pre>
+        </div>
+        <div class="callout warn">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <div class="callout-title">Removed in v0.4.1</div>
+            <div class="callout-body"><code>Bool32</code> and <code>String32</code> were deprecated in earlier
+              pre-releases and have now been <strong>fully removed</strong> from the lexer, parser, and type system.
+              Using either name is now a compile error — use <code>Bool</code> and <code>String</code> instead.
+              <code>Int32</code> and <code>Float32</code> are unaffected and remain valid.
+            </div>
+          </div>
+        </div>
+
+        <h2 id="entrypoint">10. Entry Point — <code>_Start()</code></h2>
+        <p>By default, any top-level code in Dorpn executes automatically. This works for small scripts. However, for
+          structured programs with multiple functions and complex logic, Dorpn supports an explicit entry point using
+          <code>_Start()</code>.
+        </p>
+
+        <h3>Without <code>_Start()</code> — top-level execution</h3>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">func calculateTotal(price :Float, quantity :Int) -> Float:
+    return price * quantity
+
+tag total = calculateTotal(12.5, 4)
+print("Total cost:", total)</code></pre>
+        </div>
+        <p>Top-level <code>tag</code> statements and calls execute directly inside the generated <code>main()</code>.
+          Simple and sufficient for short scripts.</p>
+
+        <h3>With <code>_Start()</code> — explicit entry point</h3>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">func loadConfig(path :String):
+    tag file :String = Onload(path)
+    print("Config loaded:", file.size(), "bytes")
+
+func displayWelcome(name :String):
+    print("─".repeat(30))
+    print("Welcome,", name)
+    print("─".repeat(30))
+
+func _Start():
+    tag name = ask("Enter your name: ")
+    loadConfig("config.txt")
+    displayWelcome(name)</code></pre>
+        </div>
+        <p>When <code>_Start()</code> is defined, Dorpn automatically calls it at the end of the generated
+          <code>main()</code>. All other functions act as helpers — <code>_Start()</code> is the single controlled entry
+          point for the entire program.
+        </p>
+
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th>Approach</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Quick scripts, simple calculations</td>
+                <td>Top-level code, no <code>_Start()</code> needed</td>
+              </tr>
+              <tr>
+                <td>Multiple functions, structured logic</td>
+                <td>Define <code>_Start()</code> as the entry point</td>
+              </tr>
+              <tr>
+                <td>Programs that scale or grow over time</td>
+                <td>Always prefer <code>_Start()</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="complete-example">11. Complete Example</h2>
+        <p>A small program combining everything covered above:</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">Const MAX_SCORE = 100
+
+func getGrade(score :Int) -> String:
+    if score >= 90:
+        return "A"
+    elif score >= 75:
+        return "B"
+    elif score >= 60:
+        return "C"
+    else:
+        return "F"
+
+func printReport(name :String, score :Int):
+    tag grade = getGrade(score)
+    print("─".repeat(30))
+    print("Student :", name)
+    print("Score   :", score, "/", MAX_SCORE)
+    print("Grade   :", grade)
+    print("─".repeat(30))
+
+
+tag name  = ask("Enter student name: ")
+tag score = ask("Enter score: ")
+
+printReport(name, score)</code></pre>
+        </div>
+
+        <h2 id="js-target">12. Compiling to JavaScript <span class="tag-new-inline">v0.4.0+</span></h2>
+        <p>Alongside the native C backend, Dorpn can also compile a <code>.dpn</code> file straight to JavaScript —
+          useful for scripting and quick testing without a native build step. Use the <code>-js</code> flag (or its
+          longer alias <code>--Javs</code>) when compiling:</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">bash</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-bash"># Compile to JavaScript
+dorpn program.dpn -js
+
+# Alternative flag (same result)
+dorpn program.dpn --Javs</code></pre>
+        </div>
+        <p>The C backend stays the default — plain <code>dorpn program.dpn</code> still produces a native executable.
+          Adding either flag switches the compile target to JavaScript instead.</p>
+        <div class="callout warn">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <div class="callout-title">JS backend coverage</div>
+            <div class="callout-body">The JavaScript backend is newer than the native C target — some features may not
+              yet be supported, or may behave slightly differently, when compiling with <code>-js</code>. Future
+              releases will keep expanding parity between the two.</div>
+          </div>
+        </div>
+
+        <h2 id="next">Where to Go Next</h2>
+        <p>Click through to dive deeper into the current available features of the Dorpn v0.4.x series.</p>
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Guide</th>
+                <th>Contents</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a class="inline-link" href="variables.html">Variables &amp; Scope</a></td>
+                <td>Variable declaration, scope, and mutation rules</td>
+              </tr>
+              <tr>
+                <td><a class="inline-link" href="types.html">Type System</a></td>
+                <td>Full type system including 32-bit variants</td>
+              </tr>
+              <tr>
+                <td><a class="inline-link" href="operators.html">Operators</a></td>
+                <td>Arithmetic, comparison, and logical operators</td>
+              </tr>
+              <tr>
+                <td><a class="inline-link" href="functions.html">Built-in Functions</a></td>
+                <td><code>ask</code>, <code>print</code>, <code>type</code>, <code>min</code>, <code>max</code>,
+                  <code>add</code> and more
+                </td>
+              </tr>
+              <tr>
+                <td><a class="inline-link" href="methods.html">Built-in Methods</a></td>
+                <td>String methods — <code>.repeat()</code>, <code>.flip()</code>, <code>.alter()</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-pagination">
+          <a class="page-link prev" href="../index.html">
+            <div class="pl-label">Back to</div>
+            <div class="pl-title"><i class="fa-solid fa-arrow-left"></i> Home</div>
+          </a>
+          <a class="page-link next" href="variables.html">
+            <div class="pl-label">Next</div>
+            <div class="pl-title">Variables &amp; Scope <i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+        <li><a href="#output">1. Output</a></li>
+        <li><a href="#variables">2. Variables &amp; Constants</a></li>
+        <li><a href="#input">3. User Input</a></li>
+        <li><a href="#conditionals">4. Conditional Logic</a></li>
+        <li><a href="#loops">5. Loops</a></li>
+        <li><a href="#keep">6. Keep — Loop</a></li>
+        <li><a href="#functions">7. Functions</a></li>
+        <li><a href="#void">— void return</a></li>
+        <li><a href="#strings">8. Strings</a></li>
+        <li><a href="#types32">9. Types &amp; 32-bit</a></li>
+        <li><a href="#entrypoint">10. _Start()</a></li>
+        <li><a href="#complete-example">11. Full Example</a></li>
+        <li><a href="#js-target">12. JavaScript Target</a></li>
+        <li><a href="#next">Where to Go Next</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="../js/search-index.js"></script>
+  <script src="../js/highlight.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

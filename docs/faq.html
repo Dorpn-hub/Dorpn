@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — Dorpn Docs</title>
+  <meta name="description"
+    content="Frequently asked questions about installing, compiling, and debugging Dorpn programs.">
+  <link rel="icon" href="../dpn-file-light.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <div class="bg-noise"></div>
+
+  <header class="topnav">
+    <button class="menu-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+    <a href="../index.html" class="brand"><span class="brand-mark"><img src="../dpn-file-light.png" alt="logo"></span>
+      Dorpn <span class="brand-version">v0.4.1</span></a>
+    <nav class="topnav-links">
+      <a href="../index.html">Home</a>
+      <a href="quickstart.html">Docs</a>
+      <a href="functions.html">API Reference</a>
+      <a href="faq.html" class="active">FAQ</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="doc-search-input" placeholder="Search docs..." autocomplete="off">
+      <kbd>/</kbd>
+      <div class="search-results" id="doc-search-results"></div>
+    </div>
+    <a class="btn-github" href="https://github.com/Dorpn-hub/Dorpn" target="_blank" rel="noopener"><i
+        class="fa-brands fa-github"></i> GitHub</a>
+  </header>
+  <div class="sidebar-overlay"></div>
+
+  <div class="docs-shell">
+    <aside class="sidebar">
+      <div class="side-group">
+        <div class="side-group-title">Getting Started</div>
+        <a class="side-link" href="quickstart.html"><i class="fa-solid fa-rocket"></i> Quickstart Guide</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Language Guide</div>
+        <a class="side-link" href="variables.html"><i class="fa-solid fa-tag"></i> Variables &amp; Scope</a>
+        <a class="side-link" href="types.html"><i class="fa-solid fa-shapes"></i> Type System</a>
+        <a class="side-link" href="operators.html"><i class="fa-solid fa-calculator"></i> Operators</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">API Reference</div>
+        <a class="side-link" href="functions.html"><i class="fa-solid fa-cube"></i> Built-in Functions</a>
+        <a class="side-link" href="methods.html"><i class="fa-solid fa-puzzle-piece"></i> Built-in Methods</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Help</div>
+        <a class="side-link active" href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+        <a class="side-link" href="https://github.com/Dorpn-hub/Dorpn/releases" target="_blank" rel="noopener"><i
+            class="fa-solid fa-download"></i> Releases</a>
+      </div>
+    </aside>
+
+    <div class="content-col">
+      <article>
+        <span class="doc-eyebrow"><i class="fa-solid fa-circle-question"></i> Help</span>
+        <h1>Frequently Asked Questions</h1>
+        <p class="lead">Answers to common questions about installing, compiling, and debugging Dorpn programs.</p>
+
+        <h2 id="installation">📦 Installation &amp; Releases</h2>
+        <div class="faq-item open">
+          <div class="faq-q"><span>How do I install Dorpn?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Download the latest release binary for your OS from the <a class="inline-link"
+                href="https://github.com/Dorpn-hub/dorpn/releases" target="_blank" rel="noopener">Releases page</a>. No
+              compilation needed!</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Is the source code available?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">The compiler source will be released when Dorpn reaches v1.0 or becomes
+              self-hosted. Currently, only compiled binaries are provided.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>How do I update to a newer version?</span><i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Easiest way (v0.4.1+): run <code>dorpn --upgrade</code>. It fetches the latest
+              release straight from the <a class="inline-link" href="https://github.com/Dorpn-hub/Dorpn" target="_blank"
+                rel="noopener">GitHub repository</a> and replaces your existing install automatically. You can still
+              download the release binary manually and replace your <code>dorpn</code> executable if you prefer.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Can I build from source?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Not currently. The compiler is closed-source until v1.0 to ensure stability and
+              proper documentation.</div>
+          </div>
+        </div>
+
+        <h2 id="basic-usage">✍️ Basic Usage</h2>
+        <div class="faq-item">
+          <div class="faq-q"><span>How do I compile my first program?</span><i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner"><code>dorpn hello.dpn</code> creates an executable. Use
+              <code>dorpn hello.dpn --run</code> to compile and run immediately.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Can I specify a different output filename?</span><i
+              class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Not directly in v0.4.1. Workaround:
+              <code>dorpn input.dpn &amp;&amp; mv input custom_name</code>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>How do I compile without executing?</span><i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Just omit the <code>--run</code> flag: <code>dorpn program.dpn</code> creates the
+              executable only.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Can I see the generated C code?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes! Use <code>dorpn program.dpn --keep-c</code> to preserve the intermediate C
+              file.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Is there a REPL or interactive mode?</span><i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Not yet. Use this one-liner:
+              <code>echo 'print("test")' &gt; temp.dpn &amp;&amp; dorpn temp.dpn -r &amp;&amp; rm temp.dpn</code> or VS
+              Code with the <code>Dorpn</code> extension.
+            </div>
+          </div>
+        </div>
+
+        <h2 id="errors">🐛 Common Errors &amp; Solutions</h2>
+        <div class="faq-item">
+          <div class="faq-q"><span>"gcc: command not found" error</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Install GCC. Ubuntu/Debian: <code>sudo apt install gcc</code>. macOS:
+              <code>xcode-select --install</code>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>"File not found" but the file exists</span><i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Check that: (1) the file extension is <code>.dpn</code>, (2) you're in the right
+              directory, and (3) there are no typos in the filename.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>"Permission denied" when running the executable</span><i
+              class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Make it executable: <code>chmod +x program_name</code></div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q"><span>Compilation fails with syntax error</span><i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Use verbose mode to pinpoint the issue: <code>dorpn file.dpn --verbose</code>.
+              Since v0.4.1, common causes are a missing <code>:</code> at the end of a block header (<code>if</code>,
+              <code>elif</code>, <code>else</code>, <code>func</code>, <code>loop</code>, <code>keep</code>) or
+              inconsistent indentation — only 2 or 4 spaces per level are accepted. See the <a class="inline-link"
+                href="changelog.html">Changelog</a> for details.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>"Cannot assign to constant" error</span><i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">You're trying to modify a <code>Const</code> variable. Use <code>tag</code> for
+              mutable variables instead.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>"Type mismatch" in assignment</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Dorpn has strict static typing. Once <code>tag x = 10</code> (<code>Int</code>) is
+              declared, you can't do <code>x = "text"</code> later.</div>
+          </div>
+        </div>
+
+        <h2 id="language">💡 Language Questions</h2>
+        <div class="faq-item">
+          <div class="faq-q"><span>What's the difference between tag and Const?</span><i
+              class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner"><code>tag</code> creates mutable variables; <code>Const</code> creates immutable
+              constants (cannot be reassigned).</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>How do I convert between types?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Conversion is automatic in some cases (<code>Int</code>→<code>Float</code> in math,
+              any type → <code>String</code> with <code>+</code>). Manual conversion functions are planned for future
+              releases.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Are arrays/lists supported?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Basic list literals (<code>[1,2,3]</code>) and indexing are supported in v0.4.1.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Can I compile the same file to both C and JavaScript?</span><i
+              class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Yes — the same <code>.dpn</code> source file works with both backends. Compile
+              without flags for a native binary, or add <code>-js</code> (or <code>--Javs</code>) for JavaScript output.
+              Some features may only be available in the native C target for now. See the <a class="inline-link"
+                href="quickstart.html#js-target">Quickstart's JavaScript Target section</a>.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Can I use external C libraries?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Not in v0.4.1. C FFI (Foreign Function Interface) is planned for future releases.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>How should I structure larger projects?</span><i
+              class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Currently single-file only. A module/import system is planned for future versions.
+            </div>
+          </div>
+        </div>
+
+        <h2 id="performance">⚡ Performance &amp; Debugging</h2>
+        <div class="faq-item">
+          <div class="faq-q"><span>My program is slow. How can I optimize?</span><i
+              class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">(1) Avoid string concatenation in loops. (2) Use <code>Int</code> instead of
+              <code>Float</code> when possible. (3) Use <code>--keep-c</code> to examine the generated C code.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>How do I debug my Dorpn code?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">(1) Add <code>print()</code> statements. (2) Use <code>type()</code> to check
+              variable types. (3) Examine the generated C code with <code>--keep-c</code>. (4) Use
+              <code>--verbose</code> for compilation insights.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>What's the maximum file size Dorpn can handle with Onload()?</span><i
+              class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-a">
+            <div class="faq-a-inner">Limited by available system memory. For large files, streaming or chunked reading
+              is being considered for future versions.</div>
+          </div>
+        </div>
+
+        <div class="callout note" style="margin-top:40px;">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <div class="callout-title">Still have questions?</div>
+            <div class="callout-body">Open an issue on the <a class="inline-link"
+                href="https://github.com/Dorpn-hub/Dorpn/issues" target="_blank" rel="noopener">Dorpn GitHub
+                repository</a> — the project is under active development and feedback shapes the roadmap.</div>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <a class="page-link prev" href="changelog.html">
+            <div class="pl-label">Previous</div>
+            <div class="pl-title"><i class="fa-solid fa-arrow-left"></i> Changelog</div>
+          </a>
+          <a class="page-link next" href="../index.html">
+            <div class="pl-label">Back to</div>
+            <div class="pl-title">Home <i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#basic-usage">Basic Usage</a></li>
+        <li><a href="#errors">Common Errors</a></li>
+        <li><a href="#language">Language Questions</a></li>
+        <li><a href="#performance">Performance &amp; Debugging</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="../js/search-index.js"></script>
+  <script src="../js/highlight.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>
