@@ -1,0 +1,81 @@
+/* ==========================================================================
+   Static search index for the Dorpn documentation site.
+   Consumed by js/main.js on pages containing #doc-search-input.
+   ========================================================================== */
+
+window.DORPN_SEARCH_INDEX = [
+  { title: "Quickstart Guide", crumb: "Getting Started", keywords: "install run first program hello world", url: "quickstart.html" },
+  { title: "Output — print()", crumb: "Getting Started · Quickstart", keywords: "print stdout console", url: "quickstart.html#output" },
+  { title: "Variables & Constants", crumb: "Language Guide", keywords: "tag const mutable immutable scope", url: "quickstart.html#variables" },
+  { title: "User Input — ask()", crumb: "Getting Started · Quickstart", keywords: "ask stdin prompt input", url: "quickstart.html#input" },
+  { title: "Conditional Logic", crumb: "Getting Started · Quickstart", keywords: "if elif else branching", url: "quickstart.html#conditionals" },
+  { title: "Loops", crumb: "Getting Started · Quickstart", keywords: "loop iteration index for", url: "quickstart.html#loops" },
+  { title: "Keep — Conditional Loop", crumb: "Getting Started · Quickstart", keywords: "keep halt skip while loop", url: "quickstart.html#keep" },
+  { title: "Functions", crumb: "Getting Started · Quickstart", keywords: "func return parameters arrow", url: "quickstart.html#functions" },
+  { title: "void — no return value", crumb: "Getting Started · Quickstart", keywords: "void pass marker no return function", url: "quickstart.html#void" },
+  { title: "String Operations", crumb: "Getting Started · Quickstart", keywords: "concatenation repeat alter flip", url: "quickstart.html#strings" },
+  { title: "Types & 32-bit Variants", crumb: "Getting Started · Quickstart", keywords: "int float string bool int32 float32", url: "quickstart.html#types32" },
+  { title: "Entry Point — _Start()", crumb: "Getting Started · Quickstart", keywords: "start entry point main", url: "quickstart.html#entrypoint" },
+  { title: "Compiling to JavaScript", crumb: "Getting Started · Quickstart", keywords: "js javascript compile target upgrade flag", url: "quickstart.html#js-target" },
+
+  { title: "Variable Declaration — tag", crumb: "Language Guide · Variables", keywords: "tag mutable declare", url: "variables.html#tag" },
+  { title: "Constants — Const", crumb: "Language Guide · Variables", keywords: "const immutable fixed value", url: "variables.html#const" },
+  { title: "Scope Rules & Visibility", crumb: "Language Guide · Variables", keywords: "scope lexical shadowing block global", url: "variables.html#scope" },
+  { title: "Best Practices", crumb: "Language Guide · Variables", keywords: "naming convention camelcase upper snake case", url: "variables.html#best-practices" },
+  { title: "Common Pitfalls", crumb: "Language Guide · Variables", keywords: "errors reassignment mistakes", url: "variables.html#pitfalls" },
+
+  { title: "Core Types", crumb: "Language Guide · Types", keywords: "int int32 float float32 string bool six types", url: "types.html#core-types" },
+  { title: "Type Annotations", crumb: "Language Guide · Types", keywords: "annotation explicit type colon int32 float32", url: "types.html#annotations" },
+  { title: "Type Inference", crumb: "Language Guide · Types", keywords: "infer automatic detect int32 float32 not inferred", url: "types.html#inference" },
+  { title: "Type Safety & Promotion", crumb: "Language Guide · Types", keywords: "mismatch promotion int float int32 float32", url: "types.html#safety" },
+  { title: "Memory & Performance", crumb: "Language Guide · Types", keywords: "memory bytes c mapping performance int32 float32 int32_t", url: "types.html#memory" },
+  { title: "32-bit Variants", crumb: "Language Guide · Types", keywords: "int32 float32 word alignment memory when to use", url: "types.html#variants" },
+
+  { title: "String Conversion with +", crumb: "Language Guide · Operators", keywords: "concatenation plus string number", url: "operators.html#concat" },
+  { title: "Addition +", crumb: "Language Guide · Operators", keywords: "add plus sum arithmetic", url: "operators.html#add" },
+  { title: "Subtraction -", crumb: "Language Guide · Operators", keywords: "minus subtract difference", url: "operators.html#sub" },
+  { title: "Multiplication *", crumb: "Language Guide · Operators", keywords: "multiply times product", url: "operators.html#mul" },
+  { title: "Division /", crumb: "Language Guide · Operators", keywords: "divide float division", url: "operators.html#div" },
+  { title: "Floor Division fld", crumb: "Language Guide · Operators", keywords: "floor integer division fld", url: "operators.html#fld" },
+  { title: "Modulo %", crumb: "Language Guide · Operators", keywords: "modulo remainder percent", url: "operators.html#mod" },
+  { title: "Exponentiation **", crumb: "Language Guide · Operators", keywords: "power exponent square root", url: "operators.html#exp" },
+  { title: "Equality ==", crumb: "Language Guide · Operators", keywords: "equal comparison equals", url: "operators.html#eq" },
+  { title: "Inequality !=", crumb: "Language Guide · Operators", keywords: "not equal comparison", url: "operators.html#neq" },
+  { title: "Less Than <", crumb: "Language Guide · Operators", keywords: "less than comparison", url: "operators.html#lt" },
+  { title: "Greater Than >", crumb: "Language Guide · Operators", keywords: "greater than comparison", url: "operators.html#gt" },
+  { title: "Less Than or Equal <=", crumb: "Language Guide · Operators", keywords: "less equal comparison", url: "operators.html#lte" },
+  { title: "Greater Than or Equal >=", crumb: "Language Guide · Operators", keywords: "greater equal comparison", url: "operators.html#gte" },
+  { title: "Logical AND", crumb: "Language Guide · Operators", keywords: "and boolean logic short circuit", url: "operators.html#and" },
+  { title: "Logical OR", crumb: "Language Guide · Operators", keywords: "or boolean logic short circuit", url: "operators.html#or" },
+  { title: "Logical NOT", crumb: "Language Guide · Operators", keywords: "not negation boolean", url: "operators.html#not" },
+
+  { title: "print(exp)", crumb: "API Reference · Built-in Functions", keywords: "print output console stdout", url: "functions.html#print" },
+  { title: "printOut(exp)", crumb: "API Reference · Built-in Functions", keywords: "printout no newline output console", url: "functions.html#printout" },
+  { title: "ask()", crumb: "API Reference · Built-in Functions", keywords: "ask input prompt stdin", url: "functions.html#ask" },
+  { title: "type()", crumb: "API Reference · Built-in Functions", keywords: "type checking runtime", url: "functions.html#type" },
+  { title: "abs()", crumb: "API Reference · Built-in Functions", keywords: "absolute value math", url: "functions.html#abs" },
+  { title: "min() / max()", crumb: "API Reference · Built-in Functions", keywords: "min max smallest largest math", url: "functions.html#minmax" },
+  { title: "add()", crumb: "API Reference · Built-in Functions", keywords: "add sum addition math alternative", url: "functions.html#add" },
+  { title: "Onload()", crumb: "API Reference · Built-in Functions", keywords: "file read io load resource", url: "functions.html#onload" },
+
+  { title: ".repeat()", crumb: "API Reference · Built-in Methods", keywords: "repeat string method multiply", url: "methods.html#repeat" },
+  { title: ".alter()", crumb: "API Reference · Built-in Methods", keywords: "alter replace string method", url: "methods.html#alter" },
+  { title: ".flip()", crumb: "API Reference · Built-in Methods", keywords: "flip reverse string method palindrome", url: "methods.html#flip" },
+  { title: ".size()", crumb: "API Reference · Built-in Methods", keywords: "size length string method count", url: "methods.html#size" },
+
+  { title: "v0.4.1 — What's New", crumb: "Help · Changelog", keywords: "changelog release notes new upgrade flag colon indentation errors ask strict", url: "changelog.html#v041-new" },
+  { title: "--upgrade flag", crumb: "Help · Changelog", keywords: "upgrade self update compiler flag", url: "changelog.html#upgrade-flag" },
+  { title: "Strict colon syntax", crumb: "Help · Changelog", keywords: "colon required block header syntax error", url: "changelog.html#strict-colon" },
+  { title: "Enforced indentation rules", crumb: "Help · Changelog", keywords: "indentation spaces tabs strict", url: "changelog.html#strict-indent" },
+  { title: "Multiple errors reported", crumb: "Help · Changelog", keywords: "semantic errors batch compiler", url: "changelog.html#multi-errors" },
+  { title: "Colorful categorized errors", crumb: "Help · Changelog", keywords: "color error output semantic syntax lexor indent", url: "changelog.html#colored-errors" },
+  { title: "Strict ask() prompt type", crumb: "Help · Changelog", keywords: "ask string prompt type semantic error", url: "changelog.html#strict-ask" },
+  { title: "v0.4.1 — What's Fixed", crumb: "Help · Changelog", keywords: "bug fixes bool32 string32 keep loop reassignment", url: "changelog.html#v041-fixed" },
+  { title: "Upgrading from v0.4.0", crumb: "Help · Changelog", keywords: "migration guide breaking changes", url: "changelog.html#upgrading" },
+
+  { title: "Installation & Releases", crumb: "Help · FAQ", keywords: "install download release binary update", url: "faq.html#installation" },
+  { title: "Basic Usage", crumb: "Help · FAQ", keywords: "compile run first program repl", url: "faq.html#basic-usage" },
+  { title: "Common Errors & Solutions", crumb: "Help · FAQ", keywords: "gcc not found file not found permission denied error", url: "faq.html#errors" },
+  { title: "Language Questions", crumb: "Help · FAQ", keywords: "tag const arrays modules ffi javascript js compile both", url: "faq.html#language" },
+  { title: "Performance & Debugging", crumb: "Help · FAQ", keywords: "optimize slow debug keep-c verbose", url: "faq.html#performance" }
+];
