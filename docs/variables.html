@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variables & Scope — Dorpn Docs</title>
+  <meta name="description"
+    content="Dorpn's variable system: tag declarations, Const immutability, lexical scoping, shadowing, and best practices.">
+  <link rel="icon" href="../dpn-file-light.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <div class="bg-noise"></div>
+
+  <header class="topnav">
+    <button class="menu-toggle" aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
+    <a href="../index.html" class="brand"><span class="brand-mark"><img src="../dpn-file-light.png" alt="logo"></span>
+      Dorpn <span class="brand-version">v0.4.1</span></a>
+    <nav class="topnav-links">
+      <a href="../index.html">Home</a>
+      <a href="quickstart.html" class="active">Docs</a>
+      <a href="functions.html">API Reference</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="doc-search-input" placeholder="Search docs..." autocomplete="off">
+      <kbd>/</kbd>
+      <div class="search-results" id="doc-search-results"></div>
+    </div>
+    <a class="btn-github" href="https://github.com/Dorpn-hub/Dorpn" target="_blank" rel="noopener"><i
+        class="fa-brands fa-github"></i> GitHub</a>
+  </header>
+  <div class="sidebar-overlay"></div>
+
+  <div class="docs-shell">
+    <aside class="sidebar">
+      <div class="side-group">
+        <div class="side-group-title">Getting Started</div>
+        <a class="side-link" href="quickstart.html"><i class="fa-solid fa-rocket"></i> Quickstart Guide</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Language Guide</div>
+        <a class="side-link active" href="variables.html"><i class="fa-solid fa-tag"></i> Variables &amp; Scope</a>
+        <a class="side-link" href="types.html"><i class="fa-solid fa-shapes"></i> Type System</a>
+        <a class="side-link" href="operators.html"><i class="fa-solid fa-calculator"></i> Operators</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">API Reference</div>
+        <a class="side-link" href="functions.html"><i class="fa-solid fa-cube"></i> Built-in Functions</a>
+        <a class="side-link" href="methods.html"><i class="fa-solid fa-puzzle-piece"></i> Built-in Methods</a>
+      </div>
+      <div class="side-group">
+        <div class="side-group-title">Help</div>
+        <a class="side-link" href="changelog.html"><i class="fa-solid fa-clock-rotate-left"></i> Changelog</a>
+        <a class="side-link" href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+        <a class="side-link" href="https://github.com/Dorpn-hub/Dorpn/releases" target="_blank" rel="noopener"><i
+            class="fa-solid fa-download"></i> Releases</a>
+      </div>
+    </aside>
+
+    <div class="content-col">
+      <article>
+        <span class="doc-eyebrow"><i class="fa-solid fa-tag"></i> Language Guide</span>
+        <h1>Variables &amp; Scope</h1>
+        <p class="lead">A comprehensive guide to variable declaration, constants, and scope management in Dorpn's
+          statically-typed environment.</p>
+
+        <h2 id="tag">Variable Declaration with <code>tag</code></h2>
+        <p>The <code>tag</code> keyword introduces mutable variables into the current scope. Variables declared with
+          <code>tag</code> can be reassigned new values, provided the new value matches the variable's inferred or
+          explicitly declared type.
+        </p>
+        <ul>
+          <li><strong>Mutability</strong> — values can be modified after initialization</li>
+          <li><strong>Type binding</strong> — each variable is permanently bound to a specific type (<code>Int</code>,
+            <code>Float</code>, <code>String</code>, or <code>Bool</code>)
+          </li>
+          <li><strong>Scope awareness</strong> — variables exist from their point of declaration forward</li>
+          <li><strong>Case sensitivity</strong> — variable names follow standard identifier rules</li>
+        </ul>
+        <p>Variables can be declared with explicit type annotations or rely on automatic type inference from the
+          assigned value. The type, once established, remains fixed for the variable's lifetime.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag name = "Dorpn"      # String
+tag count = 42          # Integer
+tag price = 19.99       # Float
+tag active = true       # Boolean</code></pre>
+        </div>
+
+        <h2 id="const">Constants with <code>Const</code></h2>
+        <p>The <code>Const</code> keyword creates immutable named values that cannot be modified after initialization.
+          Constants provide compile-time guarantees about value stability and enable performance optimizations.</p>
+        <ul>
+          <li><strong>Immutable by design</strong> — attempting to reassign a constant triggers a compile-time error
+          </li>
+          <li><strong>Compile-time verification</strong> — constants are validated during compilation</li>
+          <li><strong>Naming convention</strong> — typically <code>UPPER_SNAKE_CASE</code> for clarity</li>
+          <li><strong>Scope hierarchy</strong> — constants follow standard lexical scoping rules</li>
+        </ul>
+        <p>Constants are ideal for configuration values, mathematical constants, application metadata, and any value
+          that should remain invariant throughout program execution.</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">Const PI = 3.14159
+Const APP_NAME = "Dorpn"
+Const MAX_RETRIES = 3</code></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">Const PI = 3.14159
+PI = 3.14  # ERROR: Cannot assign to constant!</code></pre>
+        </div>
+
+        <h2 id="scope">Scope Rules &amp; Visibility</h2>
+        <p>Dorpn employs static (lexical) scoping where variable visibility is determined by the program's textual
+          structure. Scopes are created by code blocks, function definitions, and control structures.</p>
+
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Scope</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Global scope</strong></td>
+                <td>Variables declared outside any function or block</td>
+              </tr>
+              <tr>
+                <td><strong>Function scope</strong></td>
+                <td>Variables declared within a function (local to that function)</td>
+              </tr>
+              <tr>
+                <td><strong>Block scope</strong></td>
+                <td>Variables declared within control structures (<code>if</code>, <code>loop</code>, <code>keep</code>
+                  blocks)</td>
+              </tr>
+              <tr>
+                <td><strong>Nested scopes</strong></td>
+                <td>Inner scopes can access outer scope variables, but not vice versa</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Variables are available from their point of declaration:</p>
+        <div class="code-block">
+          <div class="code-head">
+            <div class="dots"><span></span><span></span><span></span></div><span class="lang-tag">dorpn</span><button
+              class="copy-btn"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code class="lang-dorpn">tag global = "I'm available everywhere below"
+
+if true:
+    tag local = "I'm only in this block"
+    print(global)  # Works
+    print(local)   # Works
+
+print(global)  # Works
+# print(local)  # ERROR: Not defined here</code></pre>
+        </div>
+
+        <h3>Shadowing behavior</h3>
+        <p>A variable in an inner scope can "shadow" (temporarily hide) a variable with the same name from an outer
+          scope. The original variable becomes inaccessible within the inner scope but regains visibility once the inner
+          scope exits.</p>
+
+        <h3>Lifetime management</h3>
+        <ul>
+          <li>Variables exist from their point of declaration until the end of their containing scope</li>
+          <li>Memory for variables is managed automatically via the generated C code</li>
+          <li>No garbage collector overhead — memory is freed deterministically</li>
+        </ul>
+
+        <h2 id="best-practices">Best Practices &amp; Guidelines</h2>
+
+        <h3>Variable naming</h3>
+        <ul>
+          <li>Use descriptive names that indicate purpose and content type</li>
+          <li>Prefer <code>camelCase</code> for variables, <code>UPPER_SNAKE_CASE</code> for constants</li>
+          <li>Avoid single-letter names except for loop counters or mathematical variables</li>
+          <li>Consider type hints in names when beneficial (e.g. <code>userCount</code>, <code>priceFloat</code>)</li>
+        </ul>
+
+        <h3>Declaration placement</h3>
+        <ul>
+          <li>Declare variables as close as possible to their first use</li>
+          <li>Group related variables with blank lines for visual separation</li>
+          <li>Initialize variables at declaration when practical</li>
+          <li>Place constants at the top of files or logical sections</li>
+        </ul>
+
+        <h3>Scope management</h3>
+        <ul>
+          <li>Minimize variable scope to reduce cognitive load</li>
+          <li>Avoid global variables when local alternatives exist</li>
+          <li>Use constants for values that shouldn't change</li>
+          <li>Consider function parameters over shared global state</li>
+        </ul>
+
+        <div class="table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Aspect</th>
+                <th><code>tag</code> Variables</th>
+                <th><code>Const</code> Constants</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mutability</td>
+                <td>Mutable (can be reassigned)</td>
+                <td>Immutable (fixed value)</td>
+              </tr>
+              <tr>
+                <td>Type flexibility</td>
+                <td>Fixed type after first assignment</td>
+                <td>Fixed type and value</td>
+              </tr>
+              <tr>
+                <td>Memory</td>
+                <td>May change memory allocation</td>
+                <td>Fixed allocation</td>
+              </tr>
+              <tr>
+                <td>Use case</td>
+                <td>Changing values, accumulators</td>
+                <td>Configuration, invariants</td>
+              </tr>
+              <tr>
+                <td>Naming convention</td>
+                <td><code>camelCase</code></td>
+                <td><code>UPPER_SNAKE_CASE</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="pitfalls">Common Pitfalls &amp; Solutions</h2>
+
+        <div class="callout danger">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <div>
+            <div class="callout-title">Reassignment errors</div>
+            <div class="callout-body">Attempting to change a variable's type after declaration results in a compile-time
+              type mismatch error. Use separate variables for different types instead.</div>
+          </div>
+        </div>
+        <div class="callout danger">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <div>
+            <div class="callout-title">Constant modification</div>
+            <div class="callout-body">Constants cannot be reassigned. Any attempt triggers a compile-time error. Use
+              <code>tag</code> instead if the value needs to change.
+            </div>
+          </div>
+        </div>
+        <div class="callout warn">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <div class="callout-title">Scope confusion</div>
+            <div class="callout-body">Variables declared in inner scopes are not accessible in outer scopes. Declare
+              variables at the appropriate scope level, or return values from inner scopes when needed externally.</div>
+          </div>
+        </div>
+        <div class="callout warn">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <div class="callout-title">Shadowing issues</div>
+            <div class="callout-body">Accidental shadowing can make outer variables inaccessible. Use distinct names
+              across nested scopes, or be intentional about when shadowing is used for clarity.</div>
+          </div>
+        </div>
+
+        <h2 id="design">Design Principles Behind Dorpn's Variable System</h2>
+        <ul>
+          <li><strong>Predictability over convenience</strong> — variables have fixed types to eliminate runtime type
+            errors and enable better compiler optimizations</li>
+          <li><strong>Explicit over implicit</strong> — type inference is supported, but the system encourages clarity
+            through appropriate naming and optional annotations</li>
+          <li><strong>Safety through immutability</strong> — constants provide compile-time guarantees about value
+            stability, reducing bug surfaces</li>
+          <li><strong>Local reasoning</strong> — lexical scoping helps you understand variable visibility by examining
+            local code structure</li>
+          <li><strong>Gradual disclosure</strong> — simple variable usage is straightforward; advanced patterns are
+            available but not required for basic programs</li>
+        </ul>
+
+        <div class="callout tip">
+          <i class="fa-solid fa-lightbulb"></i>
+          <div>
+            <div class="callout-title">Summary</div>
+            <div class="callout-body">Dorpn's variable system balances flexibility with safety, enabling both rapid
+              prototyping and robust production code through its clear semantics and compile-time guarantees.</div>
+          </div>
+        </div>
+
+        <div class="doc-pagination">
+          <a class="page-link prev" href="quickstart.html">
+            <div class="pl-label">Previous</div>
+            <div class="pl-title"><i class="fa-solid fa-arrow-left"></i> Quickstart Guide</div>
+          </a>
+          <a class="page-link next" href="types.html">
+            <div class="pl-label">Next</div>
+            <div class="pl-title">Type System <i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+        <li><a href="#tag">Declaration with tag</a></li>
+        <li><a href="#const">Constants with Const</a></li>
+        <li><a href="#scope">Scope Rules</a></li>
+        <li><a href="#best-practices">Best Practices</a></li>
+        <li><a href="#pitfalls">Common Pitfalls</a></li>
+        <li><a href="#design">Design Principles</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <script src="../js/search-index.js"></script>
+  <script src="../js/highlight.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+
+</html>
