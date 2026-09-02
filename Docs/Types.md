@@ -1,8 +1,9 @@
 # 📑 Dorpn Language Documentation 
----
-# 🏷️ Dorpn Type Keywords
 
-## Core Types
+> This file explains Dorpn's static typing system under the hood with type inference, detailing core primitive types along with concise examples. 
+
+---
+# Dorpn Type Keywords
 
 ### Int
 
@@ -96,7 +97,7 @@
 
 Can optionally specify types [Case Sensitive]:
 
-```py
+```js
 tag score: Int = 100
 tag temperature: Float = 36.6
 tag greeting: String = "Hello"
@@ -105,7 +106,7 @@ tag is_ready: Bool = false
 
 ### With 32-Bit Types (Annotation Required)
 
-```py
+```js
 tag score: Int32 = 100
 tag temperature: Float32 = 36.6
 ```
