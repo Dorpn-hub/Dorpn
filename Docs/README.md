@@ -1,34 +1,27 @@
-# Dorpn — Language Documentation
+## Dorpn — Language Documentation
 
 Welcome to the official Dorpn docs. Everything you need to read, write, and understand Dorpn is in this folder — pick a section below and dive in.
 
 ---
+| Stage | Process | Action | Output |
+| :--- | :--- | :--- | :--- |
+| **Lexing** | Lexer | Converts raw text into tokens | Tokens |
+| **Parsing** | Parser | Builds structural tree representation | AST |
+| **Semantics** | Semantic Analyzer | Validates types, scopes, and logic | Checked AST |
+| **CodeGen** | Code Generator | Emits clean, readable C code | C Code |
+| **Compilation** | GCC | Compiles C to native machine code | Machine Binary |
+| **Execution** | OS | Executes binary file | Final Result |
 
-## Compilation Pipeline
+---
 
-Here's what happens when you run `dorpn program.dpn`:
+### Detailed Breakdown
 
-```
-.dpn Source File
-      │
-      ▼
-   Lexer  ──────────────── turns raw text into tokens
-      │
-      ▼
-   Parser  ─────────────── builds an Abstract Syntax Tree (AST)
-      │
-      ▼
-  Semantic Analyzer ──── validates types, scopes, and logic
-      │
-      ▼
-  Code Generator ──────── emits clean, readable C code
-      │
-      ▼
-    GCC  ────────────────── compiles C to native machine code
-      │
-      ▼
-  Executable  ✓
-```
+* **Input:** `program.dpn` (Raw source text)
+* **Lexer:** Tokenizes source code text into discrete lexical tokens.
+* **Parser:** Constructs an Abstract Syntax Tree (AST) from tokens.
+* **Semantic Analyzer:** Verifies type safety, variable scoping, and syntax rules.
+* **Code Generator:** Translates the validated AST into high-level C code.
+* **GCC/Clang:** Compiles intermediate C code directly into a native executable binary (`✓`).
 
 No VM. No runtime. Just your code, C, and the machine.
 
@@ -36,27 +29,27 @@ No VM. No runtime. Just your code, C, and the machine.
 
 ## Documentation Index
 
-### [Variables.md](./Variables.md)
-How to declare and use variables in Dorpn. Covers `tag` for mutable values, `Const` for constants, type inference, and scoping rules.
+**[Variables.md](./Variables.md)**
+How to declare and use variables in Dorpn. Covers `tag` for mutable values, `Const` for constants, `imm` for runtime immutable variable, type inference, and scoping rules.
 
-### [Types.md](./Types.md)
+**[Types.md](./Types.md)**
 The full type system — primitives, strings, booleans, and how Dorpn's static typing works under the hood with type inference.
 
-### [Operators.md](./Operators.md)
-Every operator Dorpn supports: arithmetic, comparison, logical, and assignment. Includes precedence rules and examples.
+**[Operators.md](./Operators.md)**
+Every operator Dorpn supports: arithmetic, comparison, logical, and assignment, compound. Includes precedence rules and examples.
 
-### [built-Ins_Functions.md](./built-Ins_Functions.md)
+**[built-Ins_Functions.md](./built-Ins_Functions.md)**
 All built-in functions available out of the box — `print`, `input`, `range`, and more. Each one mapped to its C equivalent.
 
-### [built-Ins_Methods.md](./built-Ins_Methods.md)
-Built-in methods on types — string manipulation, list operations, and other type-specific utilities.
+**[built-Ins_Methods.md](./built-Ins_Methods.md)**
+Built-in methods on types — string manipulation and other type-specific utilities.
 
-### [FAQ.md](./FAQ.md)
-Common questions, gotchas, and things that might trip you up when coming from Python or another language.
+**[FAQ.md](./FAQ.md)**
+Common questions, gotchas, and things that might trip you up when coming from other languages.
 
 ---
 
-## Quick Syntax Cheatsheet
+> **Quick Syntax Cheatsheet**
 
 ```py
 # Variables
