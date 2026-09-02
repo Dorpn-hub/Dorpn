@@ -1,15 +1,14 @@
-# Dorpn
 ![20260125_112233](https://github.com/user-attachments/assets/fa64d282-a60b-4750-b034-9f29907a2abe)
 
 ## Introduction
 
-### What is Dorpn?
+> **What is Dorpn?**
 
-Dorpn is a compiled programming language designed for developers who value both performance and productivity. It combines Python-like readability with C-level execution speed — clean syntax on the surface, native binary underneath.
+Dorpn is a statically-typed inference compiled programming language designed for developers who value both performance and productivity. It combines Python-like readability with C-level execution speed — clean syntax on the surface, native binary underneath.
 
 ---
 
-## Philosophy
+> **Philosophy**
 
 Dorpn is built around three principles:
 
@@ -19,14 +18,14 @@ Dorpn is built around three principles:
 
 ---
 
-## Key Features
+> **Key Features**
 
 - **Clean Syntax** — Python-inspired, minimal boilerplate, indentation-based structure
-- **Multi-Target Compilation** — Compile to native binary (via C) or JavaScript with `-js` or `--Javs` *(v0.4.0+)*
+- **Multi-Target Compilation** — Compile to native binary (via C) or JavaScript with `-js` or `--Javs` **v0.4.0+**
 - **Static Type Inference** — Types are inferred automatically, no need to annotate everything
 - **No Runtime Overhead** — No VM, no garbage collector, no JIT warm-up delay
 - **ANSI Color Support** — Terminal color output via escape sequences, works out of the box
-- **Fast JS Output** — JavaScript target compiles in milliseconds for quick iteration *(v0.4.0+)*
+- **Fast JS Output** — JavaScript target compiles in milliseconds for quick iteration **(v0.4.0+)**
 
 ---
 
@@ -72,20 +71,20 @@ For the full syntax reference, check the [Docs folder](./Docs/) — it covers va
 
 ---
 
-## Source Code
+> **Source Code**
 
 The compiler source will be released once Dorpn reaches v1.0 or becomes self-hosted. Compiled binaries are available on the [Releases page](https://github.com/Dorpn-hub/dorpn/releases).
 
 ---
 
-## Performance
+> **Performance**
 
 Dorpn compiles to C and then to a native binary via GCC, which means execution performance is close to hand-written C. The JavaScript target trades some runtime speed for near-instant compilation.
 
 | Metric | Result |
 |--------|--------|
 | JS compilation time | ~0.002s |
-| Native (C) compilation time | ~0.549s |
+| Native (C) compilation time | ~0.452s |
 | Cold startup | ~0.7ms |
 | Base memory (small programs) | 2–4 MB |
 | Base memory (larger programs) | 20–50 MB |
@@ -97,14 +96,15 @@ Dorpn compiles to C and then to a native binary via GCC, which means execution p
 - Fast math and I/O — running close to the metal
 
 **Current trade-offs:**
-- Native compilation (~0.5s) adds a small overhead to the dev loop — use the JS target for quick testing
+- Native compilation (~0.4s) adds a small overhead to the dev loop — use the JS target for quick testing
 - String-heavy workloads will see further improvements in upcoming releases
 
 *Benchmarks are approximate and will shift as the compiler matures.*
 
 ---
 
-## Multi-Target Compilation *(v0.4.0+)*
+## In v0.4.0+
+> **Multi-Target Compilation**
 
 Starting from v0.4.0, Dorpn supports multiple compilation targets:
 
@@ -123,7 +123,7 @@ The JavaScript target is useful for rapid testing — compilation finishes in mi
 
 ---
 
-## Terminal Color Output *(v0.4.0+)*
+> **Terminal Color Output**
 
 Starting from v0.4.0, Dorpn includes `printOut()` — a built-in that writes to stdout without a newline, making ANSI color output easy to compose:
 
@@ -143,7 +143,7 @@ For a full list of built-in functions including `printOut`, see [Docs/built-Ins_
 
 ---
 
-## Support
+> **Support**
 
 - Open an issue in this repository
 - Join the [Discord](https://discord.gg/9J2qabs3gu) server
