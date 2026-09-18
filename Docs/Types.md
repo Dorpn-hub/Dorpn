@@ -1,164 +1,238 @@
-# 📑 Dorpn Language Documentation 
+# Dorpn Type System
 
-> This file explains Dorpn's static typing system under the hood with type inference, detailing core primitive types along with concise examples. 
+Dorpn is a **statically typed** language. Every value has a known type 
+before the program runs, and the compiler rejects code that mixes 
+incompatible types. This prevents whole categories of bugs at compile 
+time instead of at runtime.
+
+Dorpn provides seven core types:
+
+| Type | C Equivalent | Size | Description |
+|------|-------------|------|-------------|
+| `Int` | `long long` | 64-bit signed | Whole numbers |
+| `Int32` | `int` | 32-bit signed | Smaller whole numbers |
+| `Float` | `double` | 64-bit | Decimal numbers |
+| `Float32` | `float` | 32-bit | Lower-precision decimals |
+| `String` | `char*` | Variable | UTF-8 text |
+| `Bool` | `bool` | Logical | `true` or `false` |
+| `Unit` | `void` | — | Absence of a value |
+
+Type names are **case-sensitive**. `int` is not a type — `Int` is.
 
 ---
-# Dorpn Type Keywords
 
-### Int
+## Basic Types in Action
 
-- **Purpose**: Whole numbers (positive, negative, or zero)
-- **Characteristics**: 64-bit signed integer, no decimal point
-- **Examples**: 42, -100, 0, 1_000_000
+```py
+tag age: Int = 21
+tag price: Float = 99.99
+tag label: String = "Item"
+tag active: Bool = true
+```
 
-### Int32
+### Int and Int32
 
-- **Purpose**: Whole numbers with reduced memory footprint
-- **Characteristics**: 32-bit signed integer, no decimal point
-- **Examples**: 42, -100, 0
+`Int` is the default integer type. Use `Int32` only when you need to 
+match a specific 32-bit external interface or save memory.
 
-### Float
+```py
+tag big: Int = 9000000000       # fits in Int
+tag small: Int32 = 42           # explicit narrow type
+```
 
-- **Purpose**: Decimal numbers and scientific notation
-- **Characteristics**: Double-precision floating point, includes decimal point
-- **Examples**: 3.14, -2.5, 0.0, 1.23e-4
+### Float and Float32
 
-### Float32
+`Float` is the default decimal type. `Float32` trades precision for 
+memory — useful when you need it, but rarely the default choice.
 
-- **Purpose**: Decimal numbers with reduced memory footprint
-- **Characteristics**: Single-precision floating point, includes decimal point
-- **Examples**: 3.14, -2.5, 0.0
+```py
+tag precise: Float = 3.14159265358979
+tag approx: Float32 = 3.14
+```
 
 ### String
 
-- **Purpose**: Text data and character sequences
-- **Characteristics**: UTF-8 encoded, mutable via methods, automatic memory management
-- **Examples**: "hello", "Line 1\nLine 2", "" (empty)
+`String` holds UTF-8 text. Strings are immutable in Dorpn — operations 
+like `.flip()` and `.alter()` return **new** strings rather than 
+modifying the original.
+
+```py
+tag greeting: String = "Hello, Dorpn!"
+tag empty: String = ""
+```
 
 ### Bool
 
-- **Purpose**: Logical/boolean values
-- **Characteristics**: Binary true/false state, used in conditions and logic
-- **Values**: Only true or false (case-sensitive)
+`Bool` has exactly two values: `true` and `false`. Booleans are the 
+result of comparison and logical operators.
 
----
-
-# Key Rules Summary
-
-### Case Sensitivity
-
-- ✓ Correct: `Int`, `Float`, `String`, `Bool`, `Int32`, `Float32`
-- ✗ Incorrect: int, FLOAT, string, BOOL, int32, FLOAT32
-
-### Type Inference
-
-- Omitting type annotations → compiler infers from value
-- Literal numbers without decimal → `Int`
-- Literal numbers with decimal → `Float`
-- Text in quotes → `String`
-- true/false → `Bool`
-- 32-bit variants must be **explicitly annotated** — they are never inferred automatically
-
-### Type Safety
-
-- Once declared/inferred, type cannot change
-- Mixed operations: Int + Float → Float (promotion)
-- Mixed operations: Int32 + Float32 → Float32 (promotion)
-- String conversion: Any type + String → String
-- Boolean operators only work with Bool type
-- 32-bit and 64-bit types do not implicitly promote to each other
-
-### Default Behaviors
-
-- Division (/) always returns Float
-- Floor division (fld) always returns Int
-- Exponentiation (**) always returns Float
-- String concatenation uses + operator
-- String manipulation uses .method() calls
-
----
-
-# Memory/Performance Notes
-
-- `Int` → long long (C) - 8 bytes
-- `Int32` → int (C) - 4 bytes
-- `Float` → double (C) - 8 bytes
-- `Float32` → float (C) - 4 bytes
-- `String` → char* (C) - heap allocated, manual management
-- `Bool` → bool (C) - 1 byte
-- No garbage collector - manual freeing in generated C code
-
----
-
-**Eight types. Strict rules. Compile-time safety.**
-
----
-# Type Annotations (Optional)
-
-Can optionally specify types [Case Sensitive]:
-
-```js
-tag score: Int = 100
-tag temperature: Float = 36.6
-tag greeting: String = "Hello"
-tag is_ready: Bool = false
+```py
+tag is_ready: Bool = true
+tag is_done: Bool = 10 > 5      # true
 ```
 
-### With 32-Bit Types (Annotation Required)
+### Unit
 
-```js
-tag score: Int32 = 100
-tag temperature: Float32 = 36.6
+`Unit` represents "no value". It is used as the return type of 
+functions that perform an action but don't produce a result.
+
+```rs
+func log_message(msg: String) → Unit:
+    print(msg)
 ```
 
 ---
 
 ## Type Inference
 
-Dorpn automatically infers types from values:
+When you don't annotate a type, Dorpn infers it from the initial value:
 
 ```py
-tag x = 10           # Inferred as Int
-tag y = 3.14         # Inferred as Float
-tag z = "text"       # Inferred as String
-tag flag = true      # Inferred as Bool
+tag x = 42          # Int
+tag y = 3.14        # Float
+tag z = "hello"     # String
+tag flag = true     # Bool
 ```
 
-> **Note:** 32-bit types (`Int32`, `Float32`) are never inferred. They must always be explicitly annotated.
-
----
-
-## Type Rules
-
-### Numeric Types
+Once inferred, the type is **locked**. The variable cannot later hold 
+a value of a different type:
 
 ```py
-tag a = 5            # Int
-tag b = 5.0          # Float
-tag c = a + b        # Result: Float (10.0)
-
-# Int and Float can work together
-tag result = a * b   # Float (25.0)
+tag x = 42
+x = "hello"         # compile-time error: cannot assign String to Int
 ```
 
-### 32-Bit Numeric Types
+To be explicit — and to catch your own mistakes early — annotate 
+types when the meaning isn't obvious:
 
 ```py
-tag a: Int32 = 5
-tag b: Float32 = 5.0
-tag c: Float32 = a + b   # Result: Float32 (10.0)
+tag ratio: Float = 1 / 3
 ```
 
 ---
 
-## Type Safety
+## Type Conversion
+
+Dorpn does **not** implicitly convert between unrelated types. 
+Conversions are explicit, using built-in `.asX()` methods.
+
+### Conversion Methods
+
+| Method | Accepts | Returns | Fails When |
+|--------|---------|---------|------------|
+| `.asInt()` | Int32, Float, Float32, String | Int | String is not a valid number |
+| `.asInt32()` | Int | Int32 | Value out of 32-bit range |
+| `.asFloat()` | Int, Int32, Float32, String | Float | String is not a valid number |
+| `.asFloat32()` | Float | Float32 | Value out of 32-bit range |
+| `.asString()` | Any type | String | Never fails |
+
+### Examples
 
 ```py
-tag x: Int = "hello"   # ERROR: Type mismatch!
+tag num_str = "123"
+tag count = num_str.asInt()        # 123
 
-tag y = 10
-y = 3.14               # ERROR: Int cannot become Float!
+tag val = 42
+tag float_val = val.asFloat()      # 42.0
 
-tag z: Int32 = 10
-tag w: Int = z         # ERROR: Int32 and Int are not interchangeable!
+tag answer = 3.14
+tag text = answer.asString()       # "3.14"
 ```
+
+> [!WARNING] 
+> _String-to-number conversions trigger a **runtime panic** if the string is not a valid number. Always validate user input before converting:_
+
+
+```py
+imm input = ask("Enter a number: ")
+tag n = input.asInt()               # panics if input is "abc"
+```
+
+---
+### Narrowing Conversions
+
+`.asInt32()` and `.asFloat32()` reduce the size of a value. If the 
+value doesn't fit, a runtime panic occurs:
+
+```py
+tag big: Int = 5000000000
+tag narrow = big.asInt32()          # runtime panic: out of range
+
+tag ok: Int = 100
+tag small = ok.asInt32()            # fine
+```
+
+---
+
+## Mixed-Type Arithmetic
+
+When arithmetic mixes numeric types, Dorpn promotes the "narrower" 
+type to the "wider" one:
+
+| Left | Right | Result |
+|------|-------|--------|
+| `Int` | `Int` | `Int` |
+| `Int32` | `Int32` | `Int32` |
+| `Int` | `Int32` | `Int` |
+| `Float` | `Float32` | `Float` |
+| `Int` | `Float` | `Float` |
+| `Int32` | `Float32` | `Float` |
+
+The result of `/` is **always** `Float`, even when both operands are 
+integers:
+
+```py
+tag result = 10 / 3        # Float: 3.333...
+```
+
+For integer division that discards the remainder, use `fld`:
+
+```py
+tag floored = 10 fld 3     # Int: 3
+```
+
+`String` only participates in `+` (concatenation). Any other 
+arithmetic operator on a `String` is a compile-time error.
+
+---
+
+## Common Mistakes
+
+### 1. Forgetting that `/` returns Float
+
+```py
+tag avg = 10 / 4           # Float: 2.5, not Int 2
+tag avg_int = (10 fld 4)   # Int: 2
+```
+
+### 2. Converting unvalidated input
+
+```py
+tag n = ask("Number: ").asInt()    # panics on non-numeric input
+```
+
+Validate first:
+
+```py
+imm input = ask("Number: ")
+if input.size() > 0:
+    tag n = input.asInt()
+```
+
+### 3. Expecting implicit coercion
+
+```py
+tag n: Int = 42
+tag s: String = n                   # compile-time error
+tag s: String = n.asString()        #  correct
+```
+
+### 4. Overflowing `Int32`
+
+```py
+tag big: Int = 3000000000
+tag small = big.asInt32()           #  runtime panic
+```
+
+---
+
