@@ -1,693 +1,339 @@
-# 📑 Dorpn Language Documentation
+# Language Operators
+
+Dorpn provides a complete set of arithmetic, comparison, and logical 
+operators for working with values. An operator is a symbol that 
+combines one or two values into a new value. The rules for which 
+operators apply to which types are enforced by the compiler, so 
+invalid combinations are caught before the program runs.
+
+Understanding the operators is mostly about understanding two things. 
+First, which types each operator accepts. Second, what type the 
+operator produces as its result. Once those are clear, writing correct 
+expressions becomes straightforward.
 
 ---
 
-# String Conversion with `+`
+## Arithmetic Operators
 
-- The `+` operator is used not only for numeric addition but also for string concatenation. When one of the operands is a string, the other operand is automatically converted to a string, and the two are joined together.
-- Concatenation does not add spaces automatically. Must include them explicitly if needed.
-
-```
-tag num = 42
-tag text = "The answer is " + num  # Auto-converted to string
-print(text)  # "The answer is 42"
-```
+Dorpn provides the usual arithmetic operators along with a few that 
+have specific behavior worth noting.
 
 ---
 
-# Addition with `+`
+> **Addition** `+`
 
-- The `+` operator is also used for numeric addition.
-- If both operands are numbers , performs numeric addition.
+The `+` operator performs numeric addition when both operands are 
+numeric. If either operand is a `String`, the `+` operator instead 
+performs string concatenation, converting the non-string operand to a 
+`String` first. This dual behavior makes `+` the only arithmetic 
+operator that works with strings.
 
-
-## Integer addition
-```
-tag num = 30
-tag num1 = 40
-tag total = num + num1
-print(total)  # Output: 70
-```
-
-## Multiple additions
-```
-tag sum = 20 + 30 + 10
-print(sum)  # Output: 60
+```python
+tag sum = 10 + 20
+tag total = 3.14 + 1
+tag msg = "Value: " + 42           # "Value: 42"
+tag full = "a" + "b"               # "ab"
 ```
 
-## Float addition
-```
-tag price1 = 9.99
-tag price2 = 5.50
-tag total_price = price1 + price2
-print(total_price)  # Output: 15.49
-```
-## Mixed Int and Float (Int promoted to Float)
-```
-tag int_val = 10
-tag float_val = 3.14
-tag mixed_sum = int_val + float_val
-print(mixed_sum)  # Output: 13.14
-print(type(mixed_sum))  # Output: "Float"
-```
-## Negative numbers
-```
-tag result = 50 + (-20)
-print(result)  # Output: 30
-```
----
-
-# Substraction with `-`
-
-- The `-` operator performs numeric substraction. 
-- Both operands must be numeric (**Int or Float**).
-
-## Integer subtraction
-```
-tag difference = 100 - 45
-print(difference)  # Output: 55
-```
-
-## Float subtraction
-```
-tag float_diff = 10.5 - 3.2
-print(float_diff)  # Output: 7.3
-```
-## Negative results
-```
-tag negative = 20 - 50
-print(negative)  # Output: -30
-```
-
-## Multiple operations
-```
-tag complex = 100 - 30 - 20
-print(complex)  # Output: 50
-```
-
-## Mixed types (Int - Float)
-```
-tag int_num = 15
-tag float_num = 4.5
-tag mixed = int_num - float_num
-print(mixed)  # Output: 10.5
-print(type(mixed))  # Output: "Float"
-```
-## Error Examples
-```
-tag text = "hello"
-tag num = 10
-tag error = text - num  # COMPILE ERROR: Cannot perform '-' on Strings
-```
+The result type follows the type promotion rules of the language. 
+`Int + Int` produces `Int`, `Int + Float` produces `Float`, and any 
+combination involving `String` produces `String`.
 
 ---
 
-# Multiplication with `*`
+> **Subtraction** `-`
 
-- The `*` operator performs numeric multiplication. 
-- Both operands must be numeric.
+The `-` operator subtracts the right operand from the left. Both 
+operands must be numeric. The result type follows promotion rules.
 
-## Integer multiplication
-```
-tag product = 7 * 8
-print(product)  # Output: 56
-```
-
-## Float multiplication  
-```
-tag area = 5.5 * 3.0
-print(area)  # Output: 16.5
+```python
+tag diff = 10 - 3                  # 7
+tag neg = 3.14 - 1.0               # 2.14
 ```
 
-## With negative numbers
-```
-tag neg_product = -5 * 3
-print(neg_product)  # Output: -15
-```
-
-## Multiple multiplications
-```
-tag volume = 2 * 3 * 4
-print(volume)  # Output: 24
-```
-
-## Mixed types
-```
-tag int_val = 3
-tag float_val = 2.5
-tag mixed = int_val * float_val
-print(mixed)  # Output: 7.5
-```
+Attempting to subtract a `String` from anything, or from a `String`, 
+is a compile-time error.
 
 ---
 
-# Division with `/`
+> **Multiplication** `*`
 
-- The `/` operator performs floating-point division.
-- It always returns a **Float** , even when dividing integers.
+The `*` operator multiplies two numbers. Both operands must be 
+numeric. As with the other binary arithmetic operators, the result 
+type follows promotion rules.
 
-## Integer division (returns Float)
-```
-tag result = 10 / 2
-print(result)   # Output: 5.0
-print(type(result))  # Output: "Float"
-```
-
-## Float division
-```
-tag float_result = 15.0 / 4.0
-print(float_result)  # Output: 3.75
+```python
+tag product = 6 * 7                # 42
+tag scaled = 2 * 3.14              # 6.28
 ```
 
-## Uneven division
-```
-tag uneven = 7 / 3
-print(uneven)  # Output: 2.333333...
-```
-
-## Division by decimal
-```
-tag decimal_div = 100 / 2.5
-print(decimal_div)  # Output: 40.0
-```
-
-## Order of operations
-```
-tag complex_div = 10 + 20 / 5
-print(complex_div)  # Output: 14.0 (20/5=4.0, +10=14.0)
-```
-*Note: Division by zero will cause a runtime error (floating-point exception)*.
+Multiplication does not concatenate or repeat strings. For repeating 
+a string, use the `.repeat()` method described in Built-in Methods.
 
 ---
 
-# Floor Division with `fld`
+> **Division** `/`
 
-- The `fld` operator performs integer division, discarding any fractional part.
-- It always returns an **Int**.
+The `/` operator performs division. It always returns a `Float`, 
+regardless of the types of the operands. This is a deliberate design 
+choice. Integer division with implicit truncation is a frequent source 
+of subtle bugs, so Dorpn does not offer it through `/`.
 
-## Basic floor division
-```
-tag result = 10 fld 3
-print(result)   # Output: 3
-print(type(result))  # Output: "Int"
-```
-
-## Even division
-```
-tag even = 20 fld 4
-print(even)  # Output: 5
+```python
+tag half = 10 / 2                  # 5.0 (Float)
+tag third = 10 / 3                 # 3.333... (Float)
+tag exact = 10.0 / 4               # 2.5
 ```
 
-## Negative numbers
-```
-tag negative = -10 fld 3
-print(negative)  # Output: -4 (rounds toward negative infinity)
+If both operands are `Int`, the division still produces a `Float`. To 
+get integer division, use `fld` instead.
+
+---
+
+> **Floor Division** `fld`
+
+The `fld` operator performs floor division. It divides the left 
+operand by the right and discards the fractional part, returning an 
+`Int`. Unlike truncation toward zero, `fld` rounds toward negative 
+infinity, which is the standard mathematical definition of floor.
+
+```python
+tag q1 = 10 fld 3                  # 3
+tag q2 = -10 fld 3                 # -4 (rounds down)
+tag q3 = 10 fld 2                  # 5
 ```
 
-## Mixed types (Float gets floored first)
+This is the operator to use when you genuinely need integer division 
+and want the remainder discarded predictably.
+
+---
+
+> **Modulo** `%`
+
+The `%` operator returns the remainder of a division. For integers, it 
+produces an `Int`. For floats, it uses floating-point modulo and 
+produces a `Float`.
+
+```python
+tag rem = 10 % 3                   # 1
+tag even = 10 % 2                  # 0
+tag frac = 10.5 % 3                # 1.5
 ```
-tag mixed = 10.9 fld 2.5  # Same as: 10 fld 2
-print(mixed)  # Output: 5
+
+For negative operands, `%` follows the sign convention of the left 
+operand, consistent with the behavior of `fld`.
+
+---
+
+> **Exponentiation** `**`
+
+The `**` operator raises the left operand to the power of the right. 
+The result is always a `Float`, even when both operands are integers. 
+This keeps the behavior consistent with the mathematical definition 
+and avoids the ambiguity of integer exponentiation with negative 
+exponents.
+
+```python
+tag square = 2 ** 3                # 8.0 (Float)
+tag root = 9 ** 0.5                # 3.0
+tag one = 5 ** 0                   # 1.0
 ```
 
 ---
 
-# Modulo with `%`
+## Comparison Operators
 
-- The `%` operator returns the remainder of division.
-- Works with both **Int** and **Float**.
+Comparison operators compare two values and produce a `Bool`. They are 
+most often used in conditions and loops, but can appear anywhere a 
+`Bool` is expected.
 
-## Integer modulo
-```
-tag remainder = 17 % 5
-print(remainder)  # Output: 2
-```
+---
 
-## Even division (no remainder)
-```
-tag zero_remainder = 20 % 4
-print(zero_remainder)  # Output: 0
-```
+> **Equality** `==` and **Inequality** `!=`
 
-## Float modulo
-```
-tag float_remainder = 10.5 % 3.2
-print(float_remainder)  # Output: 0.9 (approximately)
+The `==` operator returns `true` if its operands are equal, and 
+`false` otherwise. The `!=` operator is its negation. For strings, 
+equality compares the full contents, not the memory addresses.
+
+```python
+tag a = 10 == 10                   # true
+tag b = 10 != 20                   # true
+tag c = "hello" == "hello"         # true
+tag d = true == false              # false
 ```
 
-## Check for even/odd
-```
-tag number = 42
-if number % 2 == 0:
-    print("Even number")  # Output: "Even number"
-else:
-    print("Odd number")
+Comparing values of incompatible types is a compile-time error. You 
+cannot compare an `Int` to a `String`.
+
+---
+
+> **Relational** `<`, `>`, `<=`, `>=`
+
+The relational operators compare two values and return a `Bool` 
+indicating whether the relation holds. They work on numeric types and 
+on strings.
+
+```python
+tag lt = 5 < 10                    # true
+tag gt = 5 > 10                    # false
+tag le = 5 <= 5                    # true
+tag ge = 10 >= 20                  # false
 ```
 
-## Wrapping values (circular buffer)
+For strings, comparison follows lexicographic order based on 
+character codes:
+
+```python
+tag lex = "apple" < "banana"       # true
+tag eq = "abc" <= "abc"            # true
 ```
-tag index = 15
-tag size = 10
-tag wrapped = index % size
-print(wrapped)  # Output: 5
+
+Mixing string and numeric operands in a relational comparison is a 
+compile-time error.
+
+---
+
+## Logical Operators
+
+Logical operators combine `Bool` values. Their operands must be of 
+type `Bool`. Using any other type is a compile-time error.
+
+---
+
+> `and`
+
+The `and` operator returns `true` only if both operands are `true`. It 
+uses short-circuit evaluation. If the left operand is `false`, the 
+right operand is not evaluated at all, since the result is already 
+determined.
+
+```python
+tag both = true and true           # true
+tag one = true and false           # false
+```
+
+Short-circuit behavior is useful for guarding expressions:
+
+```python
+if count > 0 and total / count > 5:
+    print("Average is high")
+```
+
+The division on the right side is only evaluated if `count > 0`, so 
+no division by zero can occur.
+
+---
+
+> `or`
+
+The `or` operator returns `true` if at least one operand is `true`. It 
+also uses short-circuit evaluation. If the left operand is `true`, the 
+right operand is not evaluated.
+
+```python
+tag either = true or false         # true
+tag neither = false or false       # false
 ```
 
 ---
 
-# Exponentiation with `**`
+> `not`
 
-- The `**` operator raises a number to a power.
-- Returns **Float** for all cases.
+The `not` operator is a unary operator that negates a `Bool`. It takes 
+a single operand and flips its value.
 
-## Integer exponentiation
-```
-tag square = 5 ** 2
-print(square)   # Output: 25.0
-print(type(square))  # Output: "Float"
+```python
+tag inverted = not true            # false
+tag same = not false               # true
 ```
 
-## Float exponentiation
-```
-tag power = 2.5 ** 3
-print(power)  # Output: 15.625
-```
+`not` binds tighter than comparison operators, so `not a == b` 
+evaluates as `(not a) == b`. Parentheses are often useful to make 
+intent explicit.
 
-## Negative exponent (reciprocal)
-```
-tag reciprocal = 2 ** -1
-print(reciprocal)  # Output: 0.5
-```
+---
 
-## Square root (using 0.5 power)
-```
-tag root = 16 ** 0.5
-print(root)  # Output: 4.0
-```
+## Precedence
 
-## Compound interest example
-```
-tag principal = 1000.0
-tag rate = 1.05  # 5% growth
-tag years = 3
-tag future_value = principal * (rate ** years)
-print(future_value)  # Output: 1157.625
+When an expression contains multiple operators, Dorpn applies them in 
+order of precedence. Higher precedence operators bind first.
+
+| Precedence | Operators |
+|------------|-----------|
+| Highest | `**` |
+| | `*`, `/`, `%`, `fld` |
+| | `+`, `-` |
+| | `<`, `>`, `<=`, `>=` |
+| | `==`, `!=` |
+| | `not` |
+| | `and` |
+| Lowest | `or` |
+
+When in doubt, use parentheses. They make the intent clear and cost 
+nothing at runtime.
+
+```python
+tag result = 2 + 3 * 4             # 14, not 20
+tag clear = (2 + 3) * 4            # 20
 ```
 
 ---
 
-# Equality Comparison with `==`
+## Type Promotion in Arithmetic
 
-- The `==` operator checks if two values are equal.
-- Returns **Bool**.
+When arithmetic operators combine operands of different numeric types, 
+the narrower type is promoted to the wider one before the operation 
+runs. The result has the wider type.
 
-## Numeric equality
-```
-tag is_equal = 10 == 10
-print(is_equal)  # Output: true
-```
+| Left | Right | Result |
+|------|-------|--------|
+| `Int` | `Int` | `Int` |
+| `Int32` | `Int32` | `Int32` |
+| `Int` | `Int32` | `Int` |
+| `Float` | `Float32` | `Float` |
+| `Int` | `Float` | `Float` |
+| `Int32` | `Float32` | `Float` |
 
-## Float equality (be careful with precision)
-```
-tag float_eq = 3.14 == 3.14
-print(float_eq)  # Output: true
-```
-
-## String equality
-```
-tag str_eq = "hello" == "hello"
-print(str_eq)  # Output: true
-```
-
-## Case-sensitive string comparison
-```
-tag case_eq = "Hello" == "hello"
-print(case_eq)  # Output: false
-```
-
-## Boolean equality
-```
-tag bool_eq = true == true
-print(bool_eq)  # Output: true
-```
-
-## Type mismatch (always false)
-```
-tag mismatch = 10 == "10"
-print(mismatch)  # Output: false
-```
-
-## In conditional statements
-```
-tag score = 85
-if score == 100:
-    print("Perfect!")
-elif score == 0:
-    print("Try again!")
-```
+The `/` operator is an exception: it always produces a `Float`, 
+regardless of operand types.
 
 ---
 
-# Inequality Comparison with `!=`
+## Common Mistakes
 
-- The `!=` operator checks if two values are NOT equal.
-- Returns **Bool**.
+### 1. Expecting `/` to return an integer
 
-## Numeric inequality
-```
-tag not_equal = 10 != 5
-print(not_equal)  # Output: true
+```python
+tag n = 10 / 2                     # 5.0, not 5
+tag i = 10 fld 2                   # 5, integer division
 ```
 
-## String inequality
-```
-tag str_ne = "apple" != "orange"
-print(str_ne)  # Output: true
+### 2. Using `*` for string repetition
+
+```python
+tag s = "ab" * 3                   # compile-time error
+tag ok = "ab".repeat(3)            # "ababab"
 ```
 
-## Same value check
-```
-tag same = 7 != 7
-print(same)  # Output: false
+### 3. Comparing mismatched types
+
+```python
+tag bad = 10 == "10"               # compile-time error
+tag good = 10 == 10                # true
 ```
 
-## Boolean inequality
-```
-tag bool_ne = true != false
-print(bool_ne)  # Output: true
+### 4. Forgetting operator precedence
+
+```python
+tag maybe = 2 + 3 * 4              # 14, not 20
+tag clear = (2 + 3) * 4            # 20
 ```
 
-## Input validation example
-```
-tag password = ask("Enter password: ")
-if password != "secret123":
-    print("Access denied")
-    halt
-print("Access granted")
-```
+### 5. Relying on `and` and `or` with non-Bool operands
 
----
-
-# Less than with `<`
-
-- The `<` operator checks if the left value is less than the right value. 
-- Returns **Bool**.
-
-## Numeric comparison
-```
-tag less = 5 < 10
-print(less)  # Output: true
-```
-
-## Float comparison
-```
-tag float_less = 3.14 < 3.15
-print(float_less)  # Output: true
-```
-
-## String lexicographic comparison
-```
-tag str_less = "apple" < "banana"
-print(str_less)  # Output: true (alphabetical order)
-```
-
-## Case matters in string comparison
-```
-tag case_less = "Apple" < "apple"
-print(case_less)  # Output: true (uppercase < lowercase in ASCII)
-```
-
-## Edge case: equal values
-```
-tag equal_check = 10 < 10
-print(equal_check)  # Output: false
-```
-
-## Range checking
-```
-tag age = 16
-if age < 18:
-    print("Underage")  # Output: "Underage"
+```python
+tag bad = 1 and 2                  # compile-time error
+tag good = true and false          # false
 ```
 
 ---
-
-# Greater Than with `>`
-
-- The `>` operator checks if the left value is greater than the right value.
-- Returns **Bool**.
-
-## Numeric comparison
-```
-tag greater = 15 > 10
-print(greater)  # Output: true
-```
-
-## Float comparison
-```
-tag float_greater = 4.2 > 4.1
-print(float_greater)  # Output: true
-```
-## String comparison
-```
-tag str_greater = "zebra" > "apple"
-print(str_greater)  # Output: true
-```
-
-## Boundary check
-```
-tag at_boundary = 10 > 10
-print(at_boundary)  # Output: false
-```
-
-## Sorting logic
-```
-tag a = 30
-tag b = 20
-if a > b:
-    tag max_val = a
-else:
-    tag max_val = b
-print(max_val)  # Output: 30
-```
-
----
-
-# Less Than or Equal with `<=`
-
-- The `<=` operator checks if the left value is less than OR equal to the right value.
-- Returns **Bool**.
-
-## Less than case
-```
-tag less_case = 5 <= 10
-print(less_case)  # Output: true
-```
-
-## Equal case
-```
-tag equal_case = 10 <= 10
-print(equal_case)  # Output: true
-```
-
-## Greater than case
-```
-tag greater_case = 15 <= 10
-print(greater_case)  # Output: false
-```
-
-## String comparison
-```
-tag str_le = "abc" <= "abc"
-print(str_le)  # Output: true
-```
-
-## Array bounds checking
-```
-tag index = 9
-tag size = 10
-if index <= size - 1:
-    print("Valid index")  # Output: "Valid index"
-```
-
----
-
-# Greater Than or Equal with `>=`
-
-- The `>=` operator checks if the left value is greater than OR equal to the right value.
-- Returns **Bool**.
-
-## Greater than case
-```
-tag greater_case = 15 >= 10
-print(greater_case)  # Output: true
-```
-
-## Equal case
-```
-tag equal_case = 10 >= 10
-print(equal_case)  # Output: true
-```
-
-## Less than case
-```
-tag less_case = 5 >= 10
-print(less_case)  # Output: false
-```
-
-## Grade checking example
-```
-tag score = 85
-if score >= 90:
-    print("Grade: A")
-elif score >= 80:
-    print("Grade: B")  # Output: "Grade: B"
-elif score >= 70:
-    print("Grade: C")
-```
-
----
-
-# Logical AND with `and`
-
-- The `and` operator performs logical conjunction. 
-- Returns **Bool**.
-- Both operands must be boolean.
-
-## Basic AND
-```
-tag result = true and true
-print(result)  # Output: true
-```
-
-## False cases
-```
-tag false1 = true and false
-print(false1)  # Output: false
-
-tag false2 = false and true
-print(false2)  # Output: false
-
-tag false3 = false and false
-print(false3)  # Output: false
-```
-
-## Short-circuit evaluation
-```
-tag x = 10
-tag y = 20
-if x > 5 and y < 30:
-    print("Both conditions true")  # Output: "Both conditions true"
-```
-
-## Range checking
-```
-tag age = 25
-if age >= 18 and age <= 65:
-    print("Working age")  # Output: "Working age"
-```   
-
-## Multiple ANDs
-```
-tag a = true
-tag b = true
-tag c = false
-tag multi = a and b and c
-print(multi)  # Output: false
-```
-
-*Note: Dorpn uses short-circuit evaluation. If the left operand is false, the right operand is not evaluated.*
-
----
-
-# Logical OR with `or`
-
-- The `or` operator performs logical disjunction.
-- Returns **Bool**. 
-- Both operands must be boolean.
-
-## Basic OR
-```
-tag result = true or false
-print(result)  # Output: true
-```
-
-## True cases
-```
-tag true1 = true or true
-print(true1)  # Output: true
-
-tag true2 = false or true
-print(true2)  # Output: true
-```
-
-## False case
-```
-tag false_case = false or false
-print(false_case)  # Output: false
-```
-
-## Input validation
-```
-tag input = ask("Enter yes or no: ")
-if input == "yes" or input == "no":
-    print("Valid input")
-else:
-    print("Invalid input")
-```
-
-## Multiple ORs
-```
-tag option = "C"
-if option == "A" or option == "B" or option == "C":
-    print("Valid option")  # Output: "Valid option"
-```
-
-*Note: Uses short-circuit evaluation. If the left operand is true, the right operand is not evaluated.*
-
----
-
-# Logical NOT with not
-
-- The not operator performs logical negation.
-- Returns **Bool**.
-- Operand must be boolean.
-
-## Basic negation
-```
-tag result = not true
-print(result)  # Output: false
-
-tag result2 = not false
-print(result2)  # Output: true
-```
-
-## Double negation
-```
-tag value = true
-tag double_not = not not value
-print(double_not)  # Output: true
-```
-
-## In conditions
-```
-tag logged_in = false
-if not logged_in:
-    print("Please log in")  # Output: "Please log in"
-```
-
-## Combined with AND/OR
-```
-tag a = true
-tag b = false
-tag combined = not (a and b)
-print(combined)  # Output: true
-```
-
-## Toggle logic
-```
-tag enabled = true
-enabled = not enabled  # Toggle to false
-print(enabled)  # Output: false
-```
-
-*Note: `not` has higher precedence than `and` and `or`. Use parentheses when needed.*
