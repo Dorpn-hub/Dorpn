@@ -65,7 +65,6 @@ loop i in 5:
     print(i)
 
 # this is aComment
--- this is a comment
 ```
 
 ---
