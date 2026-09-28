@@ -31,40 +31,8 @@ Dorpn is built around three principles:
 
 ## Basic Syntax
 
-```dpn
+<img width="1080" height="1298" alt="Screenshot_2026-09-28-12-16-01-35_eaaf3677660ea7bb87b91dca63eade31" src="https://github.com/user-attachments/assets/fcd0e749-6db7-469e-bf44-a06190277b52" />
 
-# This is comment
- 
-# Variable declarations
-tag x = 10
-Const VERSION = 4
-tag name = "Dorpn"
-
-# Functions
-func greet(name: String) -> Unit:
-    return "Hello, " + name
-
-# Conditionals
-if x > 5:
-    print("x is greater than 5")
-elif x == 5:
-    print("x is exactly 5")
-else:
-    print("x is less than 5")
-
-# Loop with range
-loop i in 100:
-    print("step " + i)
-
-# While-style loop
-keep x < 10:
-    x = x + 1
-    print(x)
-
-# Entry point in Dorpn
-func _Start():
-    print(greet("Users"))
-```
 
 For the full syntax reference, check the [Docs folder](./Docs/) — it covers variables, types, operators, built-in functions and methods, with examples for each.
 
