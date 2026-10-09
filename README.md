@@ -33,9 +33,6 @@ Dorpn is built around three principles:
 
 <img width="1080" height="1298" alt="Screenshot_2026-09-28-12-16-01-35_eaaf3677660ea7bb87b91dca63eade31" src="https://github.com/user-attachments/assets/fcd0e749-6db7-469e-bf44-a06190277b52" />
 
-
-For the full syntax reference, check the [Docs folder](./Docs/) — it covers variables, types, operators, built-in functions and methods, with examples for each.
-
 ---
 
 > **Source Code**
@@ -90,9 +87,9 @@ The JavaScript target is useful for rapid testing — compilation finishes in mi
 
 ---
 
-> **Terminal Color Output**
+Terminal Color Output
 
-Starting from v0.4.0, Dorpn includes `printOut()` — a built-in that writes to stdout without a newline, making ANSI color output easy to compose:
+Starting from v0.4.0, Dorpn includes printOut() — a built-in that writes to stdout without a newline, making ANSI color output easy to compose:
 
 ```nim
 Const fgGreen = "\033[92m"
@@ -106,12 +103,9 @@ func main():
     print(" - Dorpn is working!")
 ```
 
-For a full list of built-in functions including `printOut`, see [Docs/built-Ins_Functions.md](./Docs/built-Ins_Functions.md) — it covers every built-in with usage examples and what each maps to in C.
-
 ---
 
-> **Support**
+Support
 
-- Open an issue in this repository
-- Join the [Discord](https://discord.gg/9J2qabs3gu) server
-
+- Open an **issue** in this repository
+- Join the [Discord community](https://discord.gg/9J2qabs3gu) server
